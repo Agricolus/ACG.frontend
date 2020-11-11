@@ -1,0 +1,67 @@
+{
+  "name": "acg.frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "core-js": "^3.7.0",
+    "vue": "^3.0.2",
+    "vue-class-component": "^8.0.0-beta.4",
+    "vue-router": "^4.0.0-rc.2",
+    "vuex": "^4.0.0-rc.1"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.7",
+    "@typescript-eslint/eslint-plugin": "^2.34.0",
+    "@typescript-eslint/parser": "^2.34.0",
+    "@vue/cli-plugin-babel": "^4.5.8",
+    "@vue/cli-plugin-eslint": "^4.5.8",
+    "@vue/cli-plugin-router": "^4.5.8",
+    "@vue/cli-plugin-typescript": "^4.5.8",
+    "@vue/cli-plugin-vuex": "^4.5.8",
+    "@vue/cli-service": "^4.5.8",
+    "@vue/compiler-sfc": "^3.0.2",
+    "@vue/eslint-config-typescript": "^5.1.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-vue": "^7.1.0",
+    "less": "^3.12.2",
+    "less-loader": "^5.0.0",
+    "typescript": "^3.9.7"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "plugins": ["@typescript-eslint"],
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended",
+      "@vue/typescript/recommended"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2020
+    },
+    "rules": {
+      "no-debugger": "warn",
+      "@typescript-eslint/interface-name-prefix": "off",
+      "@typescript-eslint/naming-convention": [
+        "error",
+        {
+          "selector": "interface",
+          "format": ["PascalCase"],
+          "prefix": ["I"]
+        }
+      ]
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
