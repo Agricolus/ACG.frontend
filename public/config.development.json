@@ -1,0 +1,12 @@
+{
+  "env": "development",
+  "auth": {
+    "isAuthenticationNeeded": true,
+    "authenticationServerUrl": "http://dockerdev.agricolus.com:3000/oauth2/authorize",
+    "redirectUrl": "http://dockerdev.agricolus.com:5005/cb",
+    "clientId": "3da4c1f1-6966-47a5-9863-8a94215e0e22"
+  },
+  "api": {
+    "apiServerUrl": "http://dockerdev.agricolus.com:5000"
+  }
+}
