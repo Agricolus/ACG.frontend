@@ -13,6 +13,7 @@ export interface IConfiguration {
     isAuthenticationNeeded: boolean;
     authenticationServerUrl: string;
     redirectUrl: string;
+    refreshTokenUrl: string;
     clientId: string;
   };
   api?: {
@@ -22,10 +23,12 @@ export interface IConfiguration {
 
 const configpath = "/config.".concat(process.env.NODE_ENV).concat(".json");
 
+//we keep the modifiable reactive configuration object inside the module
 const configuration: IConfiguration = reactive<IConfiguration>({
   status: ConfigurationStatus.starting,
 });
 
+//but we export a readonly reactive version of the config
 const CONFIGURATION = readonly(configuration);
 export default CONFIGURATION;
 
