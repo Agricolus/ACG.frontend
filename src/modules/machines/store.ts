@@ -29,34 +29,26 @@ const getters: GetterTree<IState, RootState> & IGetters = { //getters implementa
 }
 
 //store mutations definition
-enum Mutations { //mutations names
-    setMachines = "set_machines_mutation"
-}
-
 interface IMutations<S = IState> { //mutation definition
-    [Mutations.setMachines](state: S, machines: IMachine[]): void;
+    setMachineMutation(state: S, machines: IMachine[]): void;
 }
 
 const mutations: MutationTree<IState> & IMutations = { //mutations implementations
-    [Mutations.setMachines](state, machines) {
+    setMachineMutation(state, machines) {
         state.machines = machines
     }
 }
 
 
 //store action definition
-enum Actions {
-    setMachines = "set_machines_action"
-}
-
 interface IActions {
-    [Actions.setMachines]({ commit }: AugmentedActionContext<IState, IMutations>, machines: IMachine[]): void;
+    setMachines({ commit }: AugmentedActionContext<IState, IMutations>, machines: IMachine[]): void;
 }
 
 
 const actions: ActionTree<IState, RootState> & IActions = {
-    [Actions.setMachines]({commit}, machines) {
-        commit(Mutations.setMachines, machines);
+    setMachines({commit}, machines) {
+        commit("setMachineMutation", machines);
     }
 }
 
@@ -73,6 +65,3 @@ const MachinesStore: Module<IState, RootState> = {
 const STORE_PREFIX = "machines";
 //store instance for direct access
 export const machinesStore = createStoreModule<IState, IGetters, IActions>(STORE_PREFIX, MachinesStore);
-
-//exposing the actions names for store consumer
-export const machinesActions = Actions;

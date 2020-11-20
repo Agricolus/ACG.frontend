@@ -9,7 +9,12 @@
         </header>
         <div class="app-content">
           <router-view></router-view>
-          <mainmap></mainmap>
+          <router-view name="rightPane" v-slot="{ Component }">
+            <div class="right-pane">
+              <component class="map-cover" :is="Component" />
+              <mainmap></mainmap>
+            </div>
+          </router-view>
         </div>
       </div>
     </div>

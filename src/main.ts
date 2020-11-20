@@ -29,6 +29,9 @@ const startupWathcer = watch(() => CONFIGURATION.status, async (status) => {
         const { default: router } = await import("./router");
         acgApp.use(router);
 
+        //moules import
+        await import("@/modules/machines");
+
         acgApp.mount('#app');
 
         //startup watcher cleanup

@@ -1,6 +1,6 @@
 import CONFIGURATION from '@/config';
 import BaseRestService from '@/services/base';
-import { IMachine, machinesActions, machinesStore } from './store';
+import { IMachine, machinesStore } from './store';
 
 const mokedData: IMachine[] = [{
     type: "Feature",
@@ -41,9 +41,9 @@ class MachinesService extends BaseRestService {
     async getMachines(): Promise<IMachine[]> {
         const machines = await this.get<IMachine[]>(`${this.baseEndpointsUrl}/machines`);
         if (machines)
-            machinesStore.dispatch(machinesActions.setMachines, machines);
+            machinesStore.dispatch("setMachines", machines);
         else
-            machinesStore.dispatch(machinesActions.setMachines, mokedData);
+            machinesStore.dispatch("setMachines", mokedData);
         
         return machines!;
     }

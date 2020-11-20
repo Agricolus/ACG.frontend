@@ -14,8 +14,14 @@ watch(() => [latLng(mapState.center), mapState.zoom], () => {
 });
 
 export function createMap(selector: string): L.Map {
-    if (!leafletMainMap)
+    if (!leafletMainMap) {
         leafletMainMap = L.map(selector);
+        leafletMainMap.setView(mapState.center, mapState.zoom);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 18,
+          id: "baselayer",
+        }).addTo(leafletMainMap);
+    }
     return leafletMainMap;
 }
 

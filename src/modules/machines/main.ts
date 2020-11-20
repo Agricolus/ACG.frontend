@@ -4,8 +4,8 @@ import { Options, Vue } from "vue-class-component";
 import { machinesService } from './service';
 import { IMachine, machinesStore } from "./store";
 
-import mapState from '../map/mapState';
-import { addLayer, removeLayer } from '../map/map';
+import mapState from '../../components/map/mapState';
+import { addLayer, removeLayer } from '../../components/map/map';
 
 machinesService.getMachines();
 
@@ -38,9 +38,13 @@ export default class MachineIndex extends Vue {
         return machinesStore.state.machines!;
     }
 
-    showOnMap(machine: IMachine) {
+    centerOnMap(machine: IMachine) {
         mapState.center = machine.geometry.coordinates as [number, number];
         mapState.zoom = 15;
+    }
+
+    startImport() {
+        this.$router.push({ name: "machines:producers" })
     }
 
     mounted() {

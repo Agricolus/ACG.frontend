@@ -17,4 +17,10 @@ import Map from "@/components/map/map.vue"
     mainmap: Map
   }
 })
-export default class FullLayout extends Vue { }
+export default class FullLayout extends Vue { 
+
+  // fallbackcpt = () => import("@/components/map/map.vue");
+
+  // fufufu = "GGGGG";
+
+}

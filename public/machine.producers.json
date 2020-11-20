@@ -1,0 +1,11 @@
+{
+    "johndeere": {
+        "handlerSrc": "/producers/johndeere/index.html",
+        "commercialName": "John Deere",
+        "wellknownUrl": "https://signin.johndeere.com/oauth2/aus78tnlaysMraFhC1t7/.well-known/oauth-authorization-server",
+        "organizatinUrl": "https://connections.deere.com/connections/johndeere-jtdNu9wXXwGCO76Xr53gGoDfFEbxHz2H9XVK9SDk/select-organizations?redirect_uri=",
+        "redirectUrl": "http://dockerdev.agricolus.com:5007/johndeere/Authentication/cb",
+        "clientId": "johndeere-jtdNu9wXXwGCO76Xr53gGoDfFEbxHz2H9XVK9SDk",
+        "scopes": "org1 eq1 ag1 ag2 files offline_access"
+    }
+}
