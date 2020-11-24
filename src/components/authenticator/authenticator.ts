@@ -1,4 +1,11 @@
+import { toRaw } from 'vue';
 import { Options, Vue } from "vue-class-component";
+import { IUserInfo, userStore } from '../user/store';
+
+
+export interface IAuthenticator {
+    messageListener(e: MessageEvent): void;
+}
 
 @Options({
     props: {
@@ -15,12 +22,18 @@ export default class Authenticator extends Vue {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     producerData!: any | null;
 
+    fullscreen = false;
+
     get open(): boolean {
         return this.modelValue
     }
 
     set open(v) {
         this.$emit("update:modelValue", v)
+    }
+
+    get user(): IUserInfo | null {
+       return userStore.getters.getUser;
     }
 
     beforeMount() {
@@ -30,29 +43,13 @@ export default class Authenticator extends Vue {
     beforeUnmount() {
         window.removeEventListener("message", this.messageListener);
     }
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     messageListener(e: MessageEvent): void {
-        if (e.origin != window.location.origin) return;
-        if (["handler-loaded", "handler-authenticated"].indexOf(e.data?.type) < 0) return;
-        if (e.data.type == "handler-loaded") {
-            const payload = JSON.parse(JSON.stringify(this.producerData));
-            const messagebody = {
-                type: "user-authentication",
-                payload
-            };
-            (this.$refs.handler as HTMLIFrameElement).contentWindow!.postMessage(messagebody, window.location.origin);
-        }
-        if (e.data.type == "handler-authenticated") {
-            console.debug("user has been authenticated", e.data.tokenifo);
-            this.open = false;
-            // const payload = JSON.parse(JSON.stringify(this.producerData));
-            // const messagebody = {
-            //     type: "organizations-authorization",
-            //     payload
-            // };
-            // (this.$refs.handler as HTMLIFrameElement).contentWindow!.postMessage(messagebody, window.location.origin);
-        }
+        throw "implement me"
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    sendMessage(messagebody: any) {
+        (this.$refs.handler as HTMLIFrameElement).contentWindow!.postMessage(messagebody, window.location.origin);
+    }
 }
