@@ -4,26 +4,25 @@
   <div class="map" id="map"></div>
 </template>
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted } from "vue";
-// import L from "leaflet";
-// import mapState from "./mapState";
+import { defineComponent, onMounted, Ref } from "vue";
 import { createMap } from "./map";
+
+export const fukingstate: {
+  center: Ref<number[]> | null;
+  layers: Ref<L.Layer[]> | null;
+} = {
+  center: null,
+  layers: null,
+};
 
 export default defineComponent({
   setup() {
     onMounted(() => {
-      console.debug("map mounted!!")
       createMap("map");
-      // const map = createMap("map");
-      // map.setView(mapState.center, mapState.zoom);
-      // L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      //   maxZoom: 18,
-      //   id: "baselayer",
-      // }).addTo(map);
     });
-    onBeforeUnmount(() => {
-      console.debug("maimaphasbeendetatched!!")
-    })
-  }
+    // onBeforeUnmount(() => {
+    //   console.debug("maimaphasbeendetatched!!");
+    // });
+  },
 });
 </script>

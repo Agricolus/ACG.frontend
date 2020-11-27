@@ -1,32 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import CONFIGURATION from '@/config';
 import BaseRestService from '@/services/base';
-// import { IMachine, machinesStore } from './store';
-
-// const mokedData: IMachine[] = [{
-//     type: "Feature",
-//     properties: {
-//         id: "first",
-//         name: "trattone",
-//         producer: "landini",
-//     },
-//     geometry: {
-//         type: "Point",
-//         coordinates: [47.463220, -1.279482]
-//     }
-// },
-// {
-//     type: "Feature",
-//     properties: {
-//         id: "second",
-//         name: "trattato",
-//         producer: "lamborgini",
-//     },
-//     geometry: {
-//         type: "Point",
-//         coordinates: [47.456220, -1.329482]
-//     }
-// }];
+import { IMachine, machinesStore } from '../machines/store';
 
 class JohnDeereService extends BaseRestService {
     private baseEndpointsUrl: string;
@@ -39,9 +12,16 @@ class JohnDeereService extends BaseRestService {
         this.baseEndpointsUrl = "https://dockerdev.agricolus.com:5008/johndeere";
     }
 
-    async getMachines(userId: string): Promise<any[]> {
-        const machines = await this.get<any[]>(`${this.baseEndpointsUrl}/machines/${userId}`);       
+    async getMachines(userId: string): Promise<IMachine[]> {
+        const machines = await this.get<IMachine[]>(`${this.baseEndpointsUrl}/machines/${userId}`);
         return machines!;
+    }
+
+    async registerMachine(userId: string, machine: IMachine): Promise<IMachine | null> {
+        const machineR = await this.post<IMachine>(`${this.baseEndpointsUrl}/machines/${userId}/${machine.id}`, machine);
+        if (machineR != null)
+            machinesStore.dispatch("setMachine", machineR);
+        return machineR;
     }
 }
 

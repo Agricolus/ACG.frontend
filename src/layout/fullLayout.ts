@@ -10,6 +10,8 @@ const UserButton = defineAsyncComponent(async () => (await UserModule).default.c
 
 import Map from "@/components/map/map.vue"
 
+console.debug(Map)
+
 @Options({
   components: {
     Sidebar,
@@ -18,9 +20,5 @@ import Map from "@/components/map/map.vue"
   }
 })
 export default class FullLayout extends Vue { 
-
-  // fallbackcpt = () => import("@/components/map/map.vue");
-
-  // fufufu = "GGGGG";
 
 }

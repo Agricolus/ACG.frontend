@@ -2,30 +2,6 @@ import CONFIGURATION from '@/config';
 import BaseRestService from '@/services/base';
 import { IMachine, machinesStore } from './store';
 
-const mokedData: IMachine[] = [{
-    type: "Feature",
-    properties: {
-        id: "first",
-        name: "trattone",
-        producer: "landini",
-    },
-    geometry: {
-        type: "Point",
-        coordinates: [47.463220, -1.279482]
-    }
-},
-{
-    type: "Feature",
-    properties: {
-        id: "second",
-        name: "trattato",
-        producer: "lamborgini",
-    },
-    geometry: {
-        type: "Point",
-        coordinates: [47.456220, -1.329482]
-    }
-}];
 
 class MachinesService extends BaseRestService {
     private baseEndpointsUrl: string;
@@ -38,14 +14,18 @@ class MachinesService extends BaseRestService {
         this.baseEndpointsUrl = CONFIGURATION.api?.apiServerUrl!;
     }
 
-    async getMachines(): Promise<IMachine[]> {
-        const machines = await this.get<IMachine[]>(`${this.baseEndpointsUrl}/machines`);
-        if (machines)
+    async getMachines(userId?: string): Promise<IMachine[]|null> {
+        const machines = await this.get<IMachine[]>(`${this.baseEndpointsUrl}/machines/${userId}`);
+        if (machines != null)
             machinesStore.dispatch("setMachines", machines);
-        else
-            machinesStore.dispatch("setMachines", mokedData);
-        
-        return machines!;
+        return machines;
+    }
+
+    async registerMachine(machine: IMachine): Promise<IMachine|null> {
+        const machineR = await this.post<IMachine>(`${this.baseEndpointsUrl}/machines/import/producer`, machine);
+        if (machineR != null)
+            machinesStore.dispatch("setMachine", machineR);
+        return machineR;
     }
 }
 

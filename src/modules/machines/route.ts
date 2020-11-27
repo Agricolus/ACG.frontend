@@ -15,13 +15,12 @@ const routes: RouteRecordRaw[] = [{
         default: () => import("./producers.vue"),
         rightPane: Bar
     }
-
 }]
 
 export default function registerRoutes() {
     routes.forEach(r => {
         router.addRoute("root", r)
-    })
+    });
     router.replace(router.currentRoute.value.fullPath)
 }
 

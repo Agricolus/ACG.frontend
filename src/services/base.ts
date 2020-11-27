@@ -50,7 +50,7 @@ export default class BaseRestService {
         if (!procede) throw "security not valid";
     }
 
-    async get<T>(resourceUrl: string): Promise<T | null> {
+    protected async get<T>(resourceUrl: string): Promise<T | null> {
         await this.checkToken();
         const request = new Request(resourceUrl, this.initGetRequest);
         const response = await fetch(request);
@@ -60,11 +60,11 @@ export default class BaseRestService {
         return null;
     }
 
-    async post<T>(resourceUrl: string, data: unknown): Promise<T | null> {
+    protected async post<T>(resourceUrl: string, data: unknown): Promise<T | null> {
         await this.checkToken();
         const init = this.initPostRequest;
         init.body = JSON.stringify(data);
-        const request = new Request(resourceUrl, this.initPostRequest);
+        const request = new Request(resourceUrl, init);
         const response = await fetch(request);
         if (!response.ok && response.status == 401)
             await this.handle401();

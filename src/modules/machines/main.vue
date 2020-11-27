@@ -1,9 +1,17 @@
 <template>
   <div>
     <div v-for="machine in machines" :key="machine.id">
-      <a @click="centerOnMap(machine)">
-        {{ machine }}
-      </a>
+      <ul>
+        <li>
+          <button @click="centerOnMap(machine)">
+            <i class="fas fa-crosshairs"></i>
+          </button>
+        </li>
+        <li v-for="(v, k) in machine" :key="k">
+          <span>{{ k }} : </span>
+          <span>{{ v }}</span>
+        </li>
+      </ul>
     </div>
     <div class="bottom">
       <button>ADD MACHINE</button>

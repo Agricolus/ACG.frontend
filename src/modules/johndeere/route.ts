@@ -1,7 +1,5 @@
 import router from "@/router"
 import { RouteRecordRaw } from 'vue-router'
-import MachineSelection from "./components/machinesSelection.vue"
-
 
 
 const routes: RouteRecordRaw[] = [
@@ -9,8 +7,8 @@ const routes: RouteRecordRaw[] = [
         path: 'johndeere/machines',
         name: 'johndeere:machines:import',
         components: {
-            // default: () => import("../machines/producers.vue"),
-            rightPane: MachineSelection
+            default: () => import("@/modules/machines/producers.vue"),
+            rightPane: () => import("./components/machinesSelection.vue")
         }
     }];
 
