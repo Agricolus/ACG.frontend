@@ -1,4 +1,6 @@
+import { PRODUCER_CONFIGURATION } from '@/config';
 import BaseRestService from '@/services/base';
+import { IJDConfiguration } from '.';
 import { IMachine, machinesStore } from '../machines/store';
 
 class JohnDeereService extends BaseRestService {
@@ -9,7 +11,9 @@ class JohnDeereService extends BaseRestService {
      */
     constructor() {
         super();
-        this.baseEndpointsUrl = "https://dockerdev.agricolus.com:5008/johndeere";
+        console.debug(PRODUCER_CONFIGURATION);
+        this.baseEndpointsUrl = PRODUCER_CONFIGURATION.get<IJDConfiguration>("johndeere").vendorApiEndpoint;
+        debugger;
     }
 
     async getMachines(userId: string): Promise<IMachine[]> {

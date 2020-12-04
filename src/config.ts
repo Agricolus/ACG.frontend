@@ -36,9 +36,9 @@ configuration.status = ConfigurationStatus.fetching;
 
 fetch(configpath).then((response) => {
   configuration.status = ConfigurationStatus.fetched;
-  response.json().then<IConfiguration>(conf => {
+  response.json().then(conf => {
     configuration.status = ConfigurationStatus.ready;
-    return Object.assign(configuration, conf);
+    Object.assign(configuration, conf);
   }, () => {
     throw "Catastrofic error! invalid configuration found on ".concat(configpath);
   });
@@ -47,4 +47,32 @@ fetch(configpath).then((response) => {
 });
 
 
+type Producers = {
+  [k: string]: any;
+};
+
+
+const producerConfigPath = "/machine.producers.json";
+const machineProducesConfig = reactive({
+  status: ConfigurationStatus.starting,
+  producers: {} as Producers,
+  get<T>(s: string): T {
+    debugger;
+    return this.producers[s] as T;
+  }
+});
+
+export const PRODUCER_CONFIGURATION = readonly(machineProducesConfig);
+
+fetch(producerConfigPath).then((response) => {
+  machineProducesConfig.status = ConfigurationStatus.fetched;
+  response.json().then(conf => {
+    machineProducesConfig.status = ConfigurationStatus.ready;
+    machineProducesConfig.producers = conf;
+  }, () => {
+    throw "Catastrofic error! invalid configuration found on ".concat(configpath);
+  });
+}, () => {
+  throw "Catastrofic error! unable to load ".concat(configpath);
+});
 

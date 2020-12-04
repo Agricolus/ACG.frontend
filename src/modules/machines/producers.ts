@@ -1,12 +1,6 @@
-import { defineAsyncComponent } from 'vue';
 import { Options, Vue } from "vue-class-component";
 
-// import authenticator from "@/components/authenticator/authenticator.vue"
-
 @Options({
-    // components: {
-    //     authenticator
-    // }
 })
 export default class MachineProducerSelect extends Vue {
 

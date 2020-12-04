@@ -1,10 +1,10 @@
 import { createApp, watch } from 'vue'
 import "./assets/site.less"
-import CONFIGURATION, { ConfigurationStatus } from './config'
+import CONFIGURATION, { ConfigurationStatus, PRODUCER_CONFIGURATION } from './config'
 
 //configuration loading
-const startupWathcer = watch(() => CONFIGURATION.status, async (status) => {
-    if (status == ConfigurationStatus.ready) {
+const startupWathcer = watch(() => [CONFIGURATION.status, PRODUCER_CONFIGURATION.status], async ([generalConfigStatus, producerConfigStatus]) => {
+    if (generalConfigStatus == ConfigurationStatus.ready && producerConfigStatus == ConfigurationStatus.ready) {
 
         const { securityService } = await import("./services/securityService");
         //security checks
