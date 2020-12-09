@@ -15,9 +15,8 @@
   border: none;
   font-family: source-sans-pro;
   cursor: pointer;
-  color: @blu-gray-1;
-
-  background: @light-gray;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
 
   &:focus {
     outline: 0;
@@ -61,31 +60,26 @@
 
 .btn-primary {
   color: @white-1;
-  background-color: @blu-gray-1;
-  border-color: @blu-gray-1;
+  background-color: @purple;
+  border-color: @purple;
 
   &:hover {
-    background-color: @light-blu;
-    border-color: @light-blu;
+    background-color: @purple-dark;
+    border-color: @purple-dark;
   }
 
   &:focus {
-    background-color: @light-blu;
-    border-color: @light-blu;
+    background-color: @purple-dark;
+    border-color: @purple-dark;
   }
 }
 
 .btn-outline {
-  color: #007bff;
+  color: @purple-dark;;
   background-color: transparent;
   background-image: none;
-  border-color: #007bff;
+  border-color:@purple-dark;
 
-  &:hover {
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-  }
 
   &:focus {
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
