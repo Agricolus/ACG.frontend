@@ -1,17 +1,25 @@
 <template>
-  <div>
-    <div class="producer-select">
+  <div class="container">
+    <header>
+      <label> import machine from producer </label>
+    </header>
+    <section>
       <select v-model="producer">
-          <option :value="null"></option>
-          <option :value="k" v-for="(p, k) in producers" :key="k">{{ p.commercialName }}</option>
+        <option :value="null"></option>
+        <option :value="k" v-for="(p, k) in producers" :key="k">{{ p.commercialName }}</option>
       </select>
-      <button :disabled="!producer" @click="selectProducer">START IMPORT</button>
-    </div>
-    <div class="bottom">
-      <button>CANCEL</button>
-    </div>
+      <div class="text-right">
+        <button :disabled="!producer" @click="selectProducer" class="btn btn-primary">START
+          IMPORT</button>
+      </div>
+
+    </section>
+    <footer>
+      <button class="btn btn-outline">CANCEL</button>
+    </footer>
     <!-- <authenticator v-if="shwoAutheticator" v-model="shwoAutheticator" :producer-data="producers[producer]"></authenticator> -->
-    <component v-if="shwoAutheticator" :is="producerAuthenticator"  v-model="shwoAutheticator" :producer-data="producers[producer]"></component>
+    <component v-if="shwoAutheticator" :is="producerAuthenticator" v-model="shwoAutheticator"
+      :producer-data="producers[producer]"></component>
   </div>
 </template>
 <script lang="ts" src="./producers.ts"></script>
