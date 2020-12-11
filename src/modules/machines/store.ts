@@ -1,5 +1,4 @@
 import { AugmentedActionContext, createStoreModule, State as RootState } from "@/store";
-import { Feature, Point } from 'geojson';
 import { ActionTree, GetterTree, Module, MutationTree } from 'vuex';
 
 //DTO definition

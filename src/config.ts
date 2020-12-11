@@ -55,11 +55,7 @@ type Producers = {
 const producerConfigPath = "/machine.producers.json";
 const machineProducesConfig = reactive({
   status: ConfigurationStatus.starting,
-  producers: {} as Producers,
-  get<T>(s: string): T {
-    debugger;
-    return this.producers[s] as T;
-  }
+  producers: {} as Producers
 });
 
 export const PRODUCER_CONFIGURATION = readonly(machineProducesConfig);
@@ -76,3 +72,6 @@ fetch(producerConfigPath).then((response) => {
   throw "Catastrofic error! unable to load ".concat(configpath);
 });
 
+export function producerConfiguration<T>(producerName: string): T | null {
+  return machineProducesConfig.producers[producerName] as T;
+}

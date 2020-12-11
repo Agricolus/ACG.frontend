@@ -10,6 +10,14 @@ const routes: RouteRecordRaw[] = [
             default: () => import("@/modules/machines/producers.vue"),
             rightPane: () => import("./components/machinesSelection.vue")
         }
+    },
+    {
+        path: 'johndeere/documents',
+        name: 'johndeere:documents:import',
+        components: {
+            default: () => import("@/modules/machines/producers.vue"),
+            rightPane: () => import("./components/documentsSelection.vue")
+        }
     }];
 
 export default function registerRoutes() {

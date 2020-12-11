@@ -23,4 +23,8 @@ export default class JohnDeereMachineSelection extends Vue {
     async mounted() {
         this.machines = await producerService.getMachines(userStore.getters.getUser!.id);
     }
+
+    async remounted() {
+        this.machines = await producerService.getMachines(userStore.getters.getUser!.id);
+    }
 }

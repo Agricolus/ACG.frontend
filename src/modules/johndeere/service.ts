@@ -1,6 +1,5 @@
-import { PRODUCER_CONFIGURATION } from '@/config';
 import BaseRestService from '@/services/base';
-import { IJDConfiguration } from '.';
+import { JDConfiguration } from '.';
 import { IMachine, machinesStore } from '../machines/store';
 
 class JohnDeereService extends BaseRestService {
@@ -11,9 +10,7 @@ class JohnDeereService extends BaseRestService {
      */
     constructor() {
         super();
-        console.debug(PRODUCER_CONFIGURATION);
-        this.baseEndpointsUrl = PRODUCER_CONFIGURATION.get<IJDConfiguration>("johndeere").vendorApiEndpoint;
-        debugger;
+        this.baseEndpointsUrl = JDConfiguration!.vendorApiEndpoint;
     }
 
     async getMachines(userId: string): Promise<IMachine[]> {
@@ -26,6 +23,16 @@ class JohnDeereService extends BaseRestService {
         if (machineR != null)
             machinesStore.dispatch("setMachine", machineR);
         return machineR;
+    }
+
+    async getDocuments(userId: string): Promise<any[]> {
+        const documents = await this.get<any[]>(`${this.baseEndpointsUrl}/documents/${userId}`);
+        return documents!;
+    }
+
+    async importDocument(userId: string, documentId: string, document: any): Promise<any[]> {
+        const res = await this.post<any>(`${this.baseEndpointsUrl}/documents/${userId}/${documentId}`, document);
+        return res!;
     }
 }
 

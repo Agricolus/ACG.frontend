@@ -1,3 +1,4 @@
+import { PRODUCER_CONFIGURATION } from '@/config';
 import { Options, Vue } from "vue-class-component";
 
 @Options({
@@ -15,19 +16,23 @@ export default class MachineProducerSelect extends Vue {
 
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    get producerData(): any { 
+    get producerData(): any {
         return this.producer && this.producers ? this.producers[this.producer] : null
     }
     async selectProducer() {
-        const producerAuthenticator = (await import(`@/modules/${this.producer}`)).AuthenticatorComponent;
-        this.producerAuthenticator = producerAuthenticator;
+        //dynamically importing selected producer module
+        const { AuthenticatorComponent } = await import(`@/modules/${this.producer}`);
+        this.producerAuthenticator = AuthenticatorComponent;
         this.shwoAutheticator = true;
     }
 
-    async mounted() {
-        this.producers = await (await fetch("/machine.producers.json")).json();
+    mounted() {
+        this.producers = PRODUCER_CONFIGURATION.producers;
     }
 
-
+    async authenticated() {
+        const { DocumentImportRouteName } = await import(`@/modules/${this.producer}`);
+        this.$router.push({ name: DocumentImportRouteName })
+    }
 }
 

@@ -15,10 +15,11 @@ const startupWathcer = watch(() => [CONFIGURATION.status, PRODUCER_CONFIGURATION
         //application startup
         const appcomponent = await import("./App.vue");
         const acgApp = createApp(appcomponent.default);
+        //global localization mixin
         acgApp.mixin({
             methods: {
                 localize(placeholder: string): string {
-                    return placeholder;
+                    return placeholder; //dummy localization function
                 }
             }
         });

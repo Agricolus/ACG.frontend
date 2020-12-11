@@ -11,7 +11,7 @@
       <button>CANCEL</button>
     </div>
     <!-- <authenticator v-if="shwoAutheticator" v-model="shwoAutheticator" :producer-data="producers[producer]"></authenticator> -->
-    <component v-if="shwoAutheticator" :is="producerAuthenticator"  v-model="shwoAutheticator" :producer-data="producers[producer]"></component>
+    <component v-if="shwoAutheticator" :is="producerAuthenticator"  v-model="shwoAutheticator" @authenticated="authenticated"></component>
   </div>
 </template>
 <script lang="ts" src="./producers.ts"></script>
