@@ -4,44 +4,40 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import L, { latLng } from 'leaflet';
 import 'leaflet-defaulticon-compatibility';
 
-import { watch } from 'vue';
+import { defineComponent, onMounted, watch } from 'vue';
 
-import mapState, { reactiveMapState } from './mapState';
-let leafletMainMap: L.Map | null = null;
+import mapState from './mapState';
 
-// watch(() => [latLng(mapState.center), mapState.zoom], () => {
-//   leafletMainMap?.setView(mapState.center, mapState.zoom);
-// });
+export default defineComponent({
+  setup() {
+    const mapReady = new Promise<L.Map>((resolve) => {
+      onMounted(() => {
+        const leafletMainMap = L.map("map");
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 18,
+          id: "baselayer",
+        }).addTo(leafletMainMap);
+        leafletMainMap.setView(mapState.center, mapState.zoom);
+        resolve(leafletMainMap);
+      });
+    });
 
+    watch(() => [latLng(mapState.center), mapState.zoom], async (n, o) => {
+      const map = await mapReady;
+      map.setView(mapState.center, mapState.zoom);
+    }, { flush: 'sync' });
 
-export function createMap(selector: string): L.Map {
-  debugger
-  if (!leafletMainMap) {
-    leafletMainMap = L.map(selector);
-    leafletMainMap.setView(mapState.center, mapState.zoom);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 18,
-      id: "baselayer",
-    }).addTo(leafletMainMap);
-  }
-  return leafletMainMap;
-}
+    watch(() => mapState.layers.map(l => l), async (n, o) => {
+      const map = await mapReady;
+      const newLayers = n.filter(x => !o.includes(x));
+      const layerToRemove = o.filter(x => !n.includes(x));
+      newLayers.forEach(l => l.addTo(map))
+      layerToRemove.forEach(l => l.remove())
+    }, { flush: 'sync' });
 
-// export function addLayer(layer: L.Layer, bounds: L.LatLngBounds | null = null) {
-//   debugger
-//   if (leafletMainMap) {
-//     layer.addTo(leafletMainMap);
-//     if (bounds && bounds.isValid()) leafletMainMap.fitBounds(bounds);
-//   }
-// }
-
-// export function removeLayer(layer: L.Layer) {
-//   layer.remove();
-// }
-
-// export function zoomTo(zoom = 20) {
-//   if (leafletMainMap) {
-//     leafletMainMap.setZoom(zoom);
-//   }
-// }
-
+    watch(() => mapState.bounds, async (n, o) => {
+      const map = await mapReady;
+      if (n && n.isValid()) map.fitBounds(n);
+    }, { flush: 'sync' });
+  },
+});
