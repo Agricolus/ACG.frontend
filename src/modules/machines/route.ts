@@ -11,10 +11,7 @@ const routes: RouteRecordRaw[] = [{
 {
     path: '/machines/producers',
     name: 'machines:producers',
-    components: {
-        default: () => import("./producers.vue"),
-        rightPane: Bar
-    }
+   component:  () => import("./producers.vue"),
 }]
 
 export default function registerRoutes() {

@@ -12,6 +12,7 @@
         <button :disabled="!producer" @click="selectProducer" class="btn btn-primary">START
           IMPORT</button>
       </div>
+      <router-view> </router-view>
 
     </section>
     <footer>
