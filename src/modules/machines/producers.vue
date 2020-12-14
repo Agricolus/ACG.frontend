@@ -5,7 +5,7 @@
 		</header>
 		<section>
 			<select v-model="producer">
-				<option :value="null"></option>
+				<option :value="null" disabled>Select producer</option>
 				<option :value="k" v-for="(p, k) in producers" :key="k">{{ p.commercialName }}</option>
 			</select>
 			<div class="text-right">
