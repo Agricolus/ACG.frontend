@@ -7,19 +7,20 @@
       <ul class="nav">
         <li class="nav-item">
           <router-link :to="{ name: 'machines' }" class="nav-link">
-            <i class="fas fa-home nav-item-icon"></i>
+            <i class="fas fa-tractor nav-item-icon"></i>
             Machines
           </router-link>
         </li>
         <li class="nav-item">
           <router-link :to="{ name: 'customers' }" class="nav-link">
-            <i class="fas fa-th-list nav-item-icon"></i>
+            <i class="fas fa-user nav-item-icon"></i>
             Customers
           </router-link>
         </li>
         <li class="nav-item">
           <router-link :to="{ name: 'settings' }" class="nav-link">
-            <i class="fas fa-th-list nav-item-icon"></i>
+
+            <i class="fas fa-cog nav-item-icon"></i>
             Settings
           </router-link>
         </li>

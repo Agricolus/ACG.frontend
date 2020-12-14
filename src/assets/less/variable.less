@@ -1,29 +1,69 @@
 // out:false, main: ../site.less
 
-@blu-gray-1: rgba(67, 66, 93, 1);
-@blu-gray-2: rgba(77, 79, 92, 1);
+// General fonts..
+@font-size-base : 18px; // Assumes the browser default, typically `16px`
+@font-size-lg : @font-size-base * 1.25;
+@font-size-sm : @font-size-base * 0.875;
+
+@font-family-sans-serif: 'Montserrat', sans-serif;
+@font-family-lato: 'Lato';
+@font-family-monospace : SFMono-Regular,
+Menlo,
+Monaco,
+Consolas,
+"Liberation Mono",
+"Courier New",
+monospace;
+
+@font-family-base : @font-family-sans-serif;
+
+@font-weight-thin: 100;
+@font-weight-light : 300;
+@font-weight-regular : 400;
+
+@font-weight-medium : 500;
+@font-weight-bold : 700;
+@font-weight-bolder : 800;
+@font-weight-base : @font-weight-regular; // La fontweight di base deve essere REGULAR altrimenti tutto nel form è diverso 
+
+@line-height-base : 1.5;
+@text-muted: @gray-dark;
+@dt-font-weight: @font-weight-bold;
+
+@spacer: 1rem;
+@headings-margin-bottom : @spacer / 2;
+@paragraph-margin-bottom: @spacer;
+@label-margin-bottom :5px;
+
+@link-color : @gray-dark;
+@link-decoration : none;
+@link-hover-color : darken(@link-color, 15%);
+@link-hover-decoration: underline;
+@table-cell-padding : .75rem;
+@table-cell-padding-sm: .3rem;
+@table-caption-color : @text-muted;
+
+@body-bg : @white-2;
+@body-color: @gray-dark;
+
+@black: black;
+
+@purple:#43425D;
+@purple-dark:#3C3B54;
+@purple-light:#A3A0FB;
+
+@gray-dark-2:#6F707B;
+@gray-dark:#4D4F5C;
+@gray-light:#A4AFB7;
+
+@white-1:#FFFFFF;
+@white-2: #0000000D;
+@white-3:#F5F6FA;
+
+
+@light-green: rgba(96, 242, 25, 1);
+@red: #F21920;
 @trasparency-1: rgba(0, 0, 0, 0.1);
 @trasparency-2: rgba(0, 0, 0, 0.05);
-@gray-purple: rgba(165, 164, 191, 1);
-@purple-1: rgba(163, 160, 251, 1);
-@purple-2: rgba(163, 166, 180, 1);
-@purple-3: rgba(164, 175, 183, 1);
-
-
-@white-1: rgba(255, 255, 255, 1);
-@white-2: rgba(245, 246, 250, 1);
-@white-3: #fafafa;
-
-@blu: rgba(0, 74, 225, 1);
-@light-blu: rgba(76, 124, 222, 1);
-@light-green: rgba(96, 242, 25, 1);
-@gray: rgb(169, 169, 169);
-@dark-gray: #6b6666;
-
-@light-gray: rgb(220, 220, 220);
-@light-gray-2: #b1abab;
-@red: #F21920;
-
-@blu-opacity: rgba(0, 74, 225, 0.16);
 
 @radius: 5px;

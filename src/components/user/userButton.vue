@@ -1,6 +1,5 @@
 <template>
   <div class="user-button">
-    |
     {{ user?.username }}<img :src="user?.image" />
     v
   </div>

@@ -40,15 +40,34 @@ html {
 }
 
 .main {
-  background-color: #fff;
+  background-color: @white-3;
   flex-direction: column;
   display: flex;
   align-items: stretch;
-  header {
-    flex-grow: 0;
-    border: 1px solid green;
-    flex-basis: 0 0 content;
+
+  >header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid @gray-light;
+    min-height: 100px;
+
+    .user-button{
+      position: absolute;
+      right: 50px;
+      font-size: 1.5rem;
+      padding-left: 20px;
+      height: min-content;
+    }
+    .title {
+      font-size: 2.8rem;
+      font-weight: bolder;
+      text-align: center;
+      letter-spacing: 7px;
+      color: #A5A4BF;
+    }
   }
+
   .app-content {
     position: relative;
     display: flex;
@@ -56,14 +75,18 @@ html {
     align-items: stretch;
     flex-direction: row;
     height: 100%;
+    overflow: hidden;
+
     &>div {
       flex: 0 1 50%;
       align-self: stretch;
       // height: 100%;
       overflow: auto;
     }
+
     .right-pane {
       position: relative;
+
       .map-cover {
         position: absolute;
         top: 0;
@@ -75,5 +98,42 @@ html {
         border-left: 1px solid #ccc;
       }
     }
+
+    .container{
+      margin: 35px 50px 50px 50px;
+      display: grid;
+      grid-template-rows: min-content 1fr min-content;
+      flex-flow: column;
+
+      >header{
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+
+      >section{
+        flex: 1;
+      }
+
+      >footer{
+        text-align: right;
+        button{
+          &:last-child{
+            margin-left: 10px;
+          }
+        }
+      }
+    }
   }
+}
+
+.scrollable{
+  height: 100%;
+    overflow-y: scroll;
+    overflow-x: auto;
+}
+
+.text-right{
+  text-align: right;
 }

@@ -11,7 +11,7 @@
   flex-flow: column;
   box-shadow: -2px 2px 3px 1px rgba(60, 60, 60, 0.4) inset;
   scrollbar-width: thin;
-  background: @blu-gray-1 0% 0%;
+  background: @purple-dark 0% 0%;
   color: @white-1;
 
   header {
@@ -69,7 +69,7 @@
 
 
         .nav-link {
-
+          font-size: 1.4rem;
           text-decoration: none;
           height: 100%;
           display: flex;
@@ -79,26 +79,25 @@
           color: @white-1;
 
           &:hover {
-            color: @purple-1  !important;
+            color: @white-1  !important;
           }
 
           &:hover i {
-            color: @purple-1;
+            color:@purple-light;
           }
 
           i {
-            color: @gray-purple;
-            width: 40px;
-            font-size: 1.2rem;
+            width: 50px;
+            font-size: 1.5rem;
           }
 
           &.router-link-active {
             background: @trasparency-1 0% 0%;
-            border-left: 3px solid @purple-1;
-            color: @purple-1;
+            border-left: 3px solid @purple;
+            color: @white-1  !important;
 
             i {
-              color: @purple-1;
+              color:@purple-light;
             }
 
           }
