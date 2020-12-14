@@ -11,6 +11,11 @@ const routes: Array<RouteRecordRaw> = [
     component: FullLayout,
     children: [
       {
+        path: '/machines',
+        name: 'machines',
+        component: Foo
+      },
+      {
         path: '/customers',
         name: 'customers',
         component: Foo
