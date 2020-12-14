@@ -4,7 +4,7 @@
 			<div class="dot-pulse"></div>
 		</div>
 		<div v-for="machine in machines" :key="machine.id" class="card">
-			<i class="fas fa-check" v-if="!machine.isRegistered"></i>
+			<i class="fas fa-check" v-if="machine.isRegistered"></i>
 			<i v-else></i>
 
 			<div class="card-body">
