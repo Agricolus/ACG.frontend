@@ -5,34 +5,34 @@ import { Options, Vue } from "vue-class-component";
 })
 export default class MachineProducerSelect extends Vue {
 
-    producer: string | null = null;
+  producer: string | null = null;
 
-    shwoAutheticator = false;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    producers: any = null;
+  shwoAutheticator = false;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  producers: any = null;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    producerAuthenticator: any = null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  producerAuthenticator: any = null;
 
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    get producerData(): any {
-        return this.producer && this.producers ? this.producers[this.producer] : null
-    }
-    async selectProducer() {
-        //dynamically importing selected producer module
-        const { AuthenticatorComponent } = await import(`@/modules/${this.producer}`);
-        this.producerAuthenticator = AuthenticatorComponent;
-        this.shwoAutheticator = true;
-    }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  get producerData(): any {
+    return this.producer && this.producers ? this.producers[this.producer] : null
+  }
+  async selectProducer() {
+    //dynamically importing selected producer module
+    const { AuthenticatorComponent } = await import(`@/modules/${this.producer}`);
+    this.producerAuthenticator = AuthenticatorComponent;
+    this.shwoAutheticator = true;
+  }
 
-    mounted() {
-        this.producers = PRODUCER_CONFIGURATION.producers;
-    }
+  mounted() {
+    this.producers = PRODUCER_CONFIGURATION.producers;
+  }
 
-    async authenticated() {
-        const { DocumentImportRouteName } = await import(`@/modules/${this.producer}`);
-        this.$router.push({ name: DocumentImportRouteName })
-    }
+  async authenticated() {
+    const { DocumentImportRouteName } = await import(`@/modules/${this.producer}`);
+    this.$router.push({ name: DocumentImportRouteName })
+  }
 }
 

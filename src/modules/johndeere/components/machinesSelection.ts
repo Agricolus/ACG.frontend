@@ -1,7 +1,5 @@
-import mapState from '@/components/map/mapState';
 import { userStore } from '@/components/user/store';
 import { IMachine } from '@/modules/machines/store';
-import L from 'leaflet';
 import { Options, Vue } from "vue-class-component";
 import { producerService } from '../service';
 
@@ -9,6 +7,8 @@ import { producerService } from '../service';
 @Options({
 })
 export default class JohnDeereMachineSelection extends Vue {
+
+  isLoading = false;
   get user() {
     return userStore.getters.getUser!;
   }
@@ -18,12 +18,6 @@ export default class JohnDeereMachineSelection extends Vue {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
-  centerOnMap(machine: IMachine) {
-    if (!machine.lat || !machine.lng) return;
-    //ADD PIN
-    mapState.center = new L.LatLng(machine.lat, machine.lng);
-    mapState.zoom = 20;
-  }
 
   async registerMachine(machine: IMachine) {
     if (machine.isRegistered) return;
@@ -31,6 +25,9 @@ export default class JohnDeereMachineSelection extends Vue {
   }
 
   async mounted() {
+    this.isLoading = true;
     this.machines = await producerService.getMachines(userStore.getters.getUser!.id);
+    this.isLoading = false;
+
   }
 }

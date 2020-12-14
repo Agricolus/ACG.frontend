@@ -1,19 +1,24 @@
 <template>
-	<div class="johndeere">
+	<div class="list">
+		<div class="loading" v-if="isLoading">
+			<div class="dot-pulse"></div>
+		</div>
 		<div v-for="machine in machines" :key="machine.id" class="card">
-			<input
-				type="checkbox"
-				:disabled="machine.isRegistered"
-				:checked="machine.isRegistered"
-				@click="registerMachine(machine)"
-			/>
+			<i class="fas fa-check" v-if="!machine.isRegistered"></i>
+			<i v-else></i>
+
 			<div class="card-body">
 				<div class="card-info">{{machine.name}} - {{machine.code}}</div>
 				<div class="card-info">{{machine.description}}</div>
 				<div class="card-info">{{machine.producerCommercialName}}</div>
 			</div>
-			<button @click="centerOnMap(machine)" class="btn btn-primary">
-				<i class="fas fa-crosshairs"></i>
+			<button
+				class="btn btn-outline"
+				@click="registerMachine(machine)"
+				:disabled="machine.isRegistered"
+			>
+				Import
+				<i class="fas fa-upload"></i>
 			</button>
 		</div>
 	</div>

@@ -18,6 +18,7 @@
   cursor: pointer;
   font-size: 1.3rem;
   letter-spacing: 2px;
+  background: none;
 }
 .btn:focus {
   outline: 0;
@@ -146,10 +147,18 @@ html {
 }
 .main > header .user-button {
   position: absolute;
-  right: 50px;
+  right: 30px;
   font-size: 1.5rem;
   padding-left: 20px;
   height: min-content;
+}
+.main > header .user-button img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: fill;
+  margin-left: 10px;
+  border: 1px solid #A4AFB7;
 }
 .main > header .title {
   font-size: 2.8rem;
@@ -186,10 +195,13 @@ html {
   border-left: 1px solid #ccc;
 }
 .main .app-content .container {
-  margin: 35px 50px 50px 50px;
+  padding: 35px 50px 0px 50px;
+  margin-bottom: 35px;
   display: grid;
   grid-template-rows: min-content 1fr min-content;
   flex-flow: column;
+  position: relative;
+  flex: 1;
 }
 .main .app-content .container > header {
   font-size: 1.8rem;
@@ -199,6 +211,14 @@ html {
 }
 .main .app-content .container > section {
   flex: 1;
+  display: flex;
+  flex-flow: column;
+}
+.main .app-content .container .list {
+  height: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: relative;
 }
 .main .app-content .container > footer {
   text-align: right;
@@ -475,109 +495,6 @@ html {
 .card .body .info label {
   font-size: 1rem;
 }
-.form {
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
-  background: #FFFFFF 0% 0%;
-  border-radius: 5px;
-  max-width: 800px;
-  padding: 15px;
-}
-.form .form-row {
-  display: flex;
-}
-.form .form-control {
-  display: flex;
-  flex-flow: column;
-  width: 100%;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-}
-.form .form-control label {
-  font-size: 1.1rem;
-}
-.form .form-control input[type="text"] {
-  font-family: source-sans-pro;
-  background-color: #F5F6FA;
-  border-radius: 5px;
-  font-size: 1.1rem;
-  padding: 5px 10px;
-}
-.form .form-control input[type="text"]:focus {
-  outline: none !important;
-}
-.form .form-control textarea {
-  background-color: transparent;
-  font-family: source-sans-pro;
-  background-color: #F5F6FA;
-  border-radius: 5px;
-  font-size: 1.1rem;
-  padding: 5px 10px;
-}
-.form .form-control textarea:focus {
-  outline: none !important;
-}
-.form .form-control .vdp-datepicker .vdp-datepicker__calendar {
-  z-index: 9999;
-}
-.form .form-control .vdp-datepicker div:first-child {
-  display: flex;
-  flex-flow: row-reverse;
-  border-radius: 5px;
-}
-.form .form-control .vdp-datepicker .vdp-datepicker__calendar-button {
-  background-color: #F5F6FA;
-  border-radius: 5px;
-  font-size: 1.1rem;
-  padding: 5px 10px;
-  margin-left: -2px;
-}
-.form .form-control .vdp-datepicker input[type="text"] {
-  background-color: transparent;
-  font-family: source-sans-pro;
-  background-color: #F5F6FA;
-  border-radius: 5px;
-  font-size: 1.1rem;
-  padding: 5px 10px;
-  width: 100%;
-  border: none;
-}
-.form .form-control .vdp-datepicker input[type="text"]:read-only {
-  background-color: #F5F6FA !important;
-}
-.form .form-control .vdp-datepicker input[type="text"]:focus {
-  outline: none !important;
-}
-.form .map-form {
-  height: 40vh;
-}
-.form .map-form .map {
-  border-radius: 5px;
-}
-.form .buttons {
-  display: flex;
-  margin-top: 20px;
-}
-.form .buttons :last-child {
-  margin-right: 0px;
-}
-.form .buttons button {
-  flex: 1;
-  margin-right: 10px;
-}
-.form .option-data {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.form .option-data label {
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-.form .option-data i {
-  font-size: 1.5rem;
-  cursor: pointer;
-}
 select {
   width: 100%;
   border-radius: 4px;
@@ -589,6 +506,10 @@ select {
 }
 select:focus {
   outline: none !important;
+}
+input[type="checkbox"] {
+  width: 25px;
+  height: 25px;
 }
 .custom-tag {
   display: inline-block;
@@ -777,12 +698,12 @@ select:focus {
 }
 .modal .modal-content {
   position: relative;
-  width: 40%;
-  height: 35%;
+  min-width: 35%;
+  height: 55%;
   z-index: 6000;
-  border: 2px solid #ccc;
-  box-shadow: 5px 10px #888;
+  border: 1px solid #A4AFB7;
   border-radius: 5px;
+  overflow: hidden;
 }
 .modal .modal-content iframe {
   width: 100%;
@@ -802,6 +723,84 @@ select:focus {
   border: 0x;
   box-shadow: none;
   border-radius: none;
+}
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 50px;
+}
+/* loading dots */
+.dot-pulse {
+  position: relative;
+  left: -9999px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #43425D;
+  color: #43425D;
+  box-shadow: 9999px 0 0 -5px #43425D;
+  animation: dotPulse 2s infinite linear;
+  animation-delay: 0.25s;
+}
+.dot-pulse::before,
+.dot-pulse::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #43425D;
+  color: #43425D;
+  margin-right: 20px;
+}
+.dot-pulse::before {
+  box-shadow: 9984px 0 0 -5px #43425D;
+  animation: dotPulseBefore 2s infinite linear;
+  animation-delay: 0s;
+}
+.dot-pulse::after {
+  box-shadow: 10014px 0 0 -5px #43425D;
+  animation: dotPulseAfter 2s infinite linear;
+  animation-delay: 0.5s;
+}
+@keyframes dotPulseBefore {
+  0% {
+    box-shadow: 9984px 0 0 -8px #43425D;
+  }
+  30% {
+    box-shadow: 9984px 0 0 1px #43425D;
+  }
+  60%,
+  100% {
+    box-shadow: 9984px 0 0 -8px #43425D;
+  }
+}
+@keyframes dotPulse {
+  0% {
+    box-shadow: 10004px 0 0 -8px #43425D;
+  }
+  30% {
+    box-shadow: 10004px 0 0 1px #43425D;
+  }
+  60%,
+  100% {
+    box-shadow: 10004px 0 0 -8px #43425D;
+  }
+}
+@keyframes dotPulseAfter {
+  0% {
+    box-shadow: 10024px 0 0 -8px #43425D;
+  }
+  30% {
+    box-shadow: 10024px 0 0 1px #43425D;
+  }
+  60%,
+  100% {
+    box-shadow: 10024px 0 0 -8px #43425D;
+  }
 }
 *,
 *::before,
