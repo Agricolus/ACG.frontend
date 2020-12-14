@@ -4,29 +4,27 @@ import { IJDConfiguration } from '.';
 import { IMachine, machinesStore } from '../machines/store';
 
 class JohnDeereService extends BaseRestService {
-    private baseEndpointsUrl: string;
+  private baseEndpointsUrl: string;
 
-    /**
-     *
-     */
-    constructor() {
-        super();
-        console.debug(PRODUCER_CONFIGURATION);
-        this.baseEndpointsUrl = PRODUCER_CONFIGURATION.get<IJDConfiguration>("johndeere").vendorApiEndpoint;
-        debugger;
-    }
+  /**
+   *
+   */
+  constructor() {
+    super();
+    this.baseEndpointsUrl = PRODUCER_CONFIGURATION.get<IJDConfiguration>("johndeere").vendorApiEndpoint;
+  }
 
-    async getMachines(userId: string): Promise<IMachine[]> {
-        const machines = await this.get<IMachine[]>(`${this.baseEndpointsUrl}/machines/${userId}`);
-        return machines!;
-    }
+  async getMachines(userId: string): Promise<IMachine[]> {
+    const machines = await this.get<IMachine[]>(`${this.baseEndpointsUrl}/machines/${userId}`);
+    return machines!;
+  }
 
-    async registerMachine(userId: string, machine: IMachine): Promise<IMachine | null> {
-        const machineR = await this.post<IMachine>(`${this.baseEndpointsUrl}/machines/${userId}/${machine.id}`, machine);
-        if (machineR != null)
-            machinesStore.dispatch("setMachine", machineR);
-        return machineR;
-    }
+  async registerMachine(userId: string, machine: IMachine): Promise<IMachine | null> {
+    const machineR = await this.post<IMachine>(`${this.baseEndpointsUrl}/machines/${userId}/${machine.id}`, machine);
+    if (machineR != null)
+      machinesStore.dispatch("setMachine", machineR);
+    return machineR;
+  }
 }
 
 export const producerService = new JohnDeereService();

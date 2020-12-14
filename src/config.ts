@@ -57,7 +57,6 @@ const machineProducesConfig = reactive({
   status: ConfigurationStatus.starting,
   producers: {} as Producers,
   get<T>(s: string): T {
-    debugger;
     return this.producers[s] as T;
   }
 });

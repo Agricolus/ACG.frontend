@@ -1,3 +1,4 @@
+import CONFIGURATION from '@/config';
 import BaseRestService from '@/services/base';
 import { IUserInfo, userActions, userStore } from './store';
 
@@ -9,7 +10,7 @@ class UserService extends BaseRestService {
    */
   constructor() {
     super();
-    this.baseEndpointsUrl = "http://dockerdev.agricolus.com:3000";
+    this.baseEndpointsUrl = CONFIGURATION.auth!.authenticationServerUrl;
   }
 
 
