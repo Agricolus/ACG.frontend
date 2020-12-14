@@ -6,7 +6,7 @@ import registerRoutes from "./route"
 import { machinesService } from "./service"
 import { machinesStore } from './store';
 import { userStore } from '@/components/user/store';
-import svgIcon from "@/assets/img/tractor.svg";
+import svgIcon from "@/assets/img/tractor-icon-map.svg";
 
 const moduleStartupWatcher = watch(() => userStore.getters.getUser, async (n, o) => {
   if (!n) return;
@@ -19,7 +19,7 @@ const machineLayer = L.featureGroup();
 
 const icon = L.icon({
   iconUrl: svgIcon,
-  iconSize: [32, 32]
+  iconSize: [46, 46]
 });
 
 watch(() => machinesStore.state.machines?.map(m => m), (n, o) => {

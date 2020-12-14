@@ -1,15 +1,16 @@
 import { Options, Vue } from "vue-class-component";
 import { userService } from './service';
-import { userStore } from "./store";
+import { IUserInfo, userStore } from "./store";
 
 @Options({})
 export default class UserButton extends Vue {
 
-    get user(): unknown {
-        return userStore.getters.getUser;
-    }
+  get user(): IUserInfo | null {
+    return userStore.getters.getUser;
+  }
 
-    mounted() {
-        userService.getUserInfo();
-    }
+  async mounted() {
+    userService.getUserInfo();
+
+  }
 }

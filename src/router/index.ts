@@ -1,31 +1,37 @@
 import FullLayout from '@/layout/fullLayout.vue'
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
-import Foo from "@/components/foo.vue"
-import Bar from "@/components/bar.vue"
+import placeholderComponent from "@/components/placeHolderComponent.vue"
+
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'root',
     component: FullLayout,
+    redirect: 'machines',
     children: [
       {
         path: '/machines',
         name: 'machines',
-        component: Foo
+        component: placeholderComponent
       },
       {
         path: '/customers',
         name: 'customers',
-        component: Foo
+        component: placeholderComponent
       },
       {
         path: '/settings',
         name: 'settings',
-        component: Bar
-      }
+        component: placeholderComponent
+      },
+
     ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: 'machines',
   }
 ]
 
@@ -33,5 +39,6 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
 
 export default router
