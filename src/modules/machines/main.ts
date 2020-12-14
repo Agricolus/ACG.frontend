@@ -9,6 +9,8 @@ export default class MachineIndex extends Vue {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   machineLayer: L.GeoJSON<any> | undefined = undefined;
 
+  noMachineMessage = 'NO MACHINE REGISTERED'
+
   get machine(): IMachine | null {
     return machinesStore.getters.getMachine("first");
   }

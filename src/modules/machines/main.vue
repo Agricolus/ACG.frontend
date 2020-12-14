@@ -17,6 +17,9 @@
 					<i class="fas fa-crosshairs"></i>
 				</button>
 			</div>
+			<div v-if="!machines.length">
+				<label>{{noMachineMessage}}</label>
+			</div>
 		</section>
 		<footer>
 			<button class="btn btn-primary" @click="startImport">IMPORT MACHINE FROM PRODUCER</button>

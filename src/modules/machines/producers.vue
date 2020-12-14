@@ -9,10 +9,7 @@
 				<option :value="k" v-for="(p, k) in producers" :key="k">{{ p.commercialName }}</option>
 			</select>
 			<div class="text-right">
-				<button :disabled="!producer" @click="selectProducer" class="btn btn-primary">
-					START
-					IMPORT
-				</button>
+				<button :disabled="!producer" @click="selectProducer" class="btn btn-primary">SEARCH</button>
 			</div>
 			<router-view></router-view>
 		</section>
