@@ -1,6 +1,8 @@
 import BaseRestService from '@/services/base';
+import { IClient } from '@/store/clientStore';
+import { IField } from '@/store/fieldStore';
 import { JDConfiguration } from '.';
-import { IMachine, machinesStore } from '../machines/store';
+import { IMachine, machinesStore } from '../../store/machineStore';
 
 class JohnDeereService extends BaseRestService {
   private baseEndpointsUrl: string;
@@ -25,6 +27,13 @@ class JohnDeereService extends BaseRestService {
     return machineR;
   }
 
+  async machineLocationHistory(userId: string, machineId: string): Promise<{point: {lat: number; lon: number}}[] | null> {
+    const machineR = await this.get<{point: {lat: number; lon: number}}[] | null>(`${this.baseEndpointsUrl}/machines/${userId}/${machineId}`);
+    // if (machineR != null)
+    //   machinesStore.dispatch("setMachine", machineR);
+    return machineR;
+  }
+
   async getDocuments(userId: string): Promise<any[]> {
     const documents = await this.get<any[]>(`${this.baseEndpointsUrl}/documents/${userId}`);
     return documents!;
@@ -33,6 +42,21 @@ class JohnDeereService extends BaseRestService {
   async importDocument(userId: string, documentId: string, document: any): Promise<any[]> {
     const res = await this.post<any>(`${this.baseEndpointsUrl}/documents/${userId}/${documentId}`, document);
     return res!;
+  }
+
+  async getFields(userId: string): Promise<{fields: IField[]; clients: IClient[]}> {
+    const fields = await this.get<{fields: IField[]; clients: IClient[]}>(`${this.baseEndpointsUrl}/fields/${userId}`);
+    return fields!;
+  }
+
+  async importField(userId: string, field: any): Promise<any[]> {
+    const fields = await this.post<any[]>(`${this.baseEndpointsUrl}/fields/${userId}`, field);
+    return fields!;
+  }
+
+  async importFields(userId: string, field: any[]): Promise<any[]> {
+    const fields = await this.post<any[]>(`${this.baseEndpointsUrl}/fields/${userId}/bulk`, field);
+    return fields!;
   }
 }
 

@@ -1,6 +1,6 @@
 import { reactive, ref } from 'vue';
 
-const mapState = reactive<{
+const reactiveMapState = reactive<{
   zoom: number;
   center: L.LatLngExpression;
   bounds: L.LatLngBounds | null;
@@ -9,16 +9,7 @@ const mapState = reactive<{
   zoom: 15,
   center: [0, 0],
   bounds: null,
-  layers: []
+  layers: new Array<L.Layer>()
 });
 
-
-export const reactiveMapState = {
-  zoom: ref<number>(3),
-  center: ref<L.LatLngExpression>([0, 0]),
-  bounds: reactive<L.LatLngBoundsExpression>([]),
-  layers: ref<L.Layer[]>([])
-}
-
-
-export default mapState
+export default reactiveMapState

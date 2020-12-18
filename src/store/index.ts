@@ -52,11 +52,6 @@ export type ModuleStore<S, G, A> = Omit<
 } & {
   subscribeAction<K extends keyof A>(fn: SubscribeActionOptions<AugmentedActionPayload<K, UnsafeParameter<A[K]>[1]>, S>, options?: SubscribeOptions | undefined): () => void;
 }
-//subscribeAction<ActionPayload>(fn: SubscribeActionOptions<ActionPayload, IState>, options?: SubscribeOptions | undefined): () => void (+1 overload)
-
-// type ActionsNamings<A extends { [prop: string]: (...args: any) => any }> = {
-//   [P in keyof A]: (payload: Parameters<A[P]>[1]) => ReturnType<A[P]>;
-// }
 
 
 export function createStoreModule<S, G, A>(storeprefix: string, storeDefinition: StoreOptions<S>): ModuleStore<S, G, A> {

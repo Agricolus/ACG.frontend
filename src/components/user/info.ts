@@ -1,6 +1,6 @@
 import { Options, Vue } from "vue-class-component";
-import { userService } from './service';
-import { userStore } from "./store";
+import { userServices } from '../../services/userServices';
+import { userStore } from "../../store/userStore";
 
 @Options({})
 export default class UserInfo extends Vue {
@@ -10,6 +10,6 @@ export default class UserInfo extends Vue {
     }
 
     mounted() {
-        userService.getUserInfo();
+        userServices.getUserInfo();
     }
 }

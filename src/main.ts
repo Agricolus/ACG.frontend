@@ -1,5 +1,6 @@
 import { createApp, watch } from 'vue'
 import "./assets/site.less"
+
 import CONFIGURATION, { ConfigurationStatus, PRODUCER_CONFIGURATION } from './config'
 
 //configuration loading
@@ -10,7 +11,9 @@ const startupWathcer = watch(() => [CONFIGURATION.status, PRODUCER_CONFIGURATION
         //security checks
         const secured = await securityService.accessTokenCapture();
         if (!secured) return
-        
+
+        const { userServices }  = await import('@/services/userServices');
+        await userServices.getUserInfo();
 
         //application startup
         const appcomponent = await import("./App.vue");
@@ -30,8 +33,7 @@ const startupWathcer = watch(() => [CONFIGURATION.status, PRODUCER_CONFIGURATION
         const { default: router } = await import("./router");
         acgApp.use(router);
 
-        //moules import
-        await import("@/modules/machines");
+        
 
         acgApp.mount('#app');
 

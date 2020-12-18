@@ -3,6 +3,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 import placeholderComponent from "@/components/placeHolderComponent.vue"
 
+import ProducerSelect from "@/components/import/producers.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -14,7 +15,12 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/machines',
         name: 'machines',
-        component: placeholderComponent
+        component: () => import("@/components/machines/main.vue"),
+      },
+      {
+        path: '/machines/producers',
+        name: 'machines:producers',
+        component: () => import("@/components/machines/producers.vue"),
       },
       {
         path: '/customers',
@@ -22,9 +28,9 @@ const routes: Array<RouteRecordRaw> = [
         component: placeholderComponent
       },
       {
-        path: '/settings',
-        name: 'settings',
-        component: placeholderComponent
+        path: '/import',
+        name: 'import',
+        component: ProducerSelect
       },
 
     ]

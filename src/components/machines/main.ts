@@ -1,7 +1,8 @@
 import L from 'leaflet';
+import { watch } from 'vue';
 import { Options, Vue } from "vue-class-component";
-import { IMachine, machinesStore } from "./store";
-import mapState from '../../components/map/mapState';
+import { IMachine, machinesStore } from "../../store/machineStore";
+import reactiveMapState from '../map/mapState';
 import machineModule from "./index";
 
 @Options({})
@@ -20,8 +21,8 @@ export default class MachineIndex extends Vue {
 
   centerOnMap(machine: IMachine) {
     if (!machine.lat || !machine.lng) return;
-    mapState.center = new L.LatLng(machine.lat, machine.lng);
-    mapState.zoom = 18;
+    reactiveMapState.center = new L.LatLng(machine.lat, machine.lng);
+    reactiveMapState.zoom = 18;
   }
 
   startImport() {
@@ -29,12 +30,14 @@ export default class MachineIndex extends Vue {
   }
 
   mounted() {
-    mapState.layers.push(machineModule.layer);
-    mapState.bounds = machineModule.layer.getBounds();
+    reactiveMapState.layers.push(machineModule.layer);
+    watch(() => machinesStore.state.machines?.map(m => m), () => {
+      reactiveMapState.bounds = machineModule.layer.getBounds();
+    }, { immediate: true });
   }
 
   beforeUnmount() {
-    mapState.layers.splice(mapState.layers.indexOf(machineModule.layer), 1);
+    reactiveMapState.layers.splice(reactiveMapState.layers.indexOf(machineModule.layer), 1);
   }
 }
 

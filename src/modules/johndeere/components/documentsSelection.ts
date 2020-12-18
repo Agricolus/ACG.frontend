@@ -1,5 +1,5 @@
-import { userStore } from '@/components/user/store';
-import { IMachine } from '@/modules/machines/store';
+import { userStore } from '@/store/userStore';
+import { IMachine } from '@/store/machineStore';
 import { Options, Vue } from "vue-class-component";
 import { producerService } from '../service';
 

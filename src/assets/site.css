@@ -469,6 +469,23 @@ html {
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
+#diagonalHatch {
+  fill-opacity: 1;
+  fill: #ff0000;
+}
+path.not-passable {
+  color: #ff0000;
+  stroke: #ff0000;
+  fill: url(#diagonalHatch);
+}
+path.passable {
+  stroke: #00ff00;
+  fill: #00ff00;
+}
+path.highlight {
+  stroke: yellow;
+  fill: yellow;
+}
 .card {
   display: grid;
   grid-gap: 2rem;

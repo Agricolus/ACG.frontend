@@ -5,3 +5,23 @@
   border: 1px solid @trasparency-2;
 }
 
+#diagonalHatch {
+  fill-opacity: 1;
+  fill: #ff0000;
+}
+
+path.not-passable { 
+  color: #ff0000;
+  stroke: #ff0000;
+  fill: url(#diagonalHatch);
+}
+
+path.passable {
+  stroke: #00ff00;
+  fill: #00ff00;
+}
+
+path.highlight {
+  stroke: yellow;
+  fill: yellow;
+}

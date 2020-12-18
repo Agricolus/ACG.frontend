@@ -23,6 +23,8 @@ export const JDConfiguration = producerConfiguration<IJDConfiguration>("johndeer
 
 export const AuthenticatorComponent = authenticator;
 
+export const MainImportRoute = "johndeere:import";
+
 export const MachineImportRouteName = "johndeere:machines:import";
 
 export const DocumentImportRouteName = "johndeere:documents:import";

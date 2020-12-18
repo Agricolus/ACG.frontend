@@ -26,13 +26,17 @@ export default class MachineProducerSelect extends Vue {
     this.shwoAutheticator = true;
   }
 
+  back() {
+    this.$router.back();
+  }
+
   mounted() {
     this.producers = PRODUCER_CONFIGURATION.producers;
   }
 
   async authenticated() {
-    const { DocumentImportRouteName } = await import(`@/modules/${this.producer}`);
-    this.$router.push({ name: DocumentImportRouteName })
+    const { MachineImportRouteName } = await import(`@/modules/${this.producer}`);
+    this.$router.push({ name: MachineImportRouteName })
   }
 }
 

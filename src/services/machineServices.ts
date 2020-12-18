@@ -1,9 +1,9 @@
 import CONFIGURATION from '@/config';
 import BaseRestService from '@/services/base';
-import { IMachine, machinesStore } from './store';
+import { IMachine, machinesStore } from '../store/machineStore';
 
 
-class MachinesService extends BaseRestService {
+class MachinesServices extends BaseRestService {
     private baseEndpointsUrl: string;
 
     /**
@@ -29,4 +29,4 @@ class MachinesService extends BaseRestService {
     }
 }
 
-export const machinesService = new MachinesService();
+export const machinesServices = new MachinesServices();

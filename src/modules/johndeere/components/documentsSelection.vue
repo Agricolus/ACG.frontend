@@ -1,5 +1,6 @@
 <template>
-    <div class="johndeere">
+  <h2>ADAPT Document selection</h2>
+  <div class="johndeere">
     <div class="document" v-for="document in documents" :key="document.id">
       <ul>
         <li><input type="checkbox" @click="registerDocument(document)" /></li>

@@ -1,19 +1,14 @@
 
 import L from 'leaflet';
 import { watch } from 'vue';
-import registerRoutes from "./route"
 
-import { machinesService } from "./service"
-import { machinesStore } from './store';
-import { userStore } from '@/components/user/store';
+import { machinesServices } from "../../services/machineServices"
+import { machinesStore } from '../../store/machineStore';
+import { userStore } from '@/store/userStore';
 import svgIcon from "@/assets/img/tractor-icon-map.svg";
 
-const moduleStartupWatcher = watch(() => userStore.getters.getUser, async (n, o) => {
-  if (!n) return;
-  await machinesService.getMachines(n.id);
-  registerRoutes();
-  moduleStartupWatcher();
-});
+
+machinesServices.getMachines(userStore.getters.getUser!.id);
 
 const machineLayer = L.featureGroup();
 
@@ -34,9 +29,6 @@ watch(() => machinesStore.state.machines?.map(m => m), (n, o) => {
   }
 });
 
-
 export default {
-  store: machinesStore,
-  service: machinesService,
   layer: machineLayer
 }

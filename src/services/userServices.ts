@@ -1,8 +1,8 @@
 import CONFIGURATION from '@/config';
 import BaseRestService from '@/services/base';
-import { IUserInfo, userActions, userStore } from './store';
+import { IUserInfo, userActions, userStore } from '@/store/userStore';
 
-class UserService extends BaseRestService {
+class UserServices extends BaseRestService {
   private baseEndpointsUrl: string;
 
   /**
@@ -21,4 +21,4 @@ class UserService extends BaseRestService {
   }
 }
 
-export const userService = new UserService();
+export const userServices = new UserServices();

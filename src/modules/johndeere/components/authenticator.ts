@@ -1,5 +1,5 @@
 import BaseAuthenticator from "@/components/authenticator/authenticator.vue"
-import { IUserInfo, userStore } from '@/components/user/store';
+import { IUserInfo, userStore } from '@/store/userStore';
 import { JDConfiguration } from '..';
 
 export default class JonDeereAuthenticator extends BaseAuthenticator {

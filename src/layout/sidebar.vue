@@ -18,10 +18,10 @@
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link :to="{ name: 'settings' }" class="nav-link">
+          <router-link :to="{ name: 'import' }" class="nav-link">
 
-            <i class="fas fa-cog nav-item-icon"></i>
-            Settings
+            <i class="fas fa-download nav-item-icon"></i>
+            Import 
           </router-link>
         </li>
       </ul>
