@@ -14,7 +14,7 @@ class MachinesServices extends BaseRestService {
         this.baseEndpointsUrl = CONFIGURATION.api?.apiServerUrl!;
     }
 
-    async getMachines(userId?: string): Promise<IMachine[]|null> {
+    async getMachines(userId: string): Promise<IMachine[]|null> {
         const machines = await this.get<IMachine[]>(`${this.baseEndpointsUrl}/machines/${userId}`);
         if (machines != null)
             machinesStore.dispatch("setMachines", machines);
@@ -26,6 +26,10 @@ class MachinesServices extends BaseRestService {
         if (machineR != null)
             machinesStore.dispatch("setMachine", machineR);
         return machineR;
+    }
+
+    async getMachineMovements(userId: string, machineId: string): Promise<any[] | null> {
+        return await this.get<any[]>(`${this.baseEndpointsUrl}/machines/${userId}/${machineId}`);        
     }
 }
 

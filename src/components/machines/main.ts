@@ -3,41 +3,30 @@ import { watch } from 'vue';
 import { Options, Vue } from "vue-class-component";
 import { IMachine, machinesStore } from "../../store/machineStore";
 import reactiveMapState from '../map/mapState';
-import machineModule from "./index";
+import { machinesLayer } from "./index";
 
-@Options({})
-export default class MachineIndex extends Vue {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  machineLayer: L.GeoJSON<any> | undefined = undefined;
+import MachineCard from "./card.vue";
 
-  get machine(): IMachine | null {
-    return machinesStore.getters.getMachine("first");
+@Options({
+  components: {
+    MachineCard
   }
-
+})
+export default class MachineIndex extends Vue {
 
   get machines(): IMachine[] {
     return machinesStore.state.machines!;
   }
 
-  centerOnMap(machine: IMachine) {
-    if (!machine.lat || !machine.lng) return;
-    reactiveMapState.center = new L.LatLng(machine.lat, machine.lng);
-    reactiveMapState.zoom = 18;
-  }
-
-  startImport() {
-    this.$router.push({ name: "machines:producers" })
-  }
-
   mounted() {
-    reactiveMapState.layers.push(machineModule.layer);
+    reactiveMapState.layers.push(machinesLayer);
     watch(() => machinesStore.state.machines?.map(m => m), () => {
-      reactiveMapState.bounds = machineModule.layer.getBounds();
+      reactiveMapState.bounds = machinesLayer.getBounds();
     }, { immediate: true });
   }
 
   beforeUnmount() {
-    reactiveMapState.layers.splice(reactiveMapState.layers.indexOf(machineModule.layer), 1);
+    reactiveMapState.layers.splice(reactiveMapState.layers.indexOf(machinesLayer), 1);
   }
 }
 

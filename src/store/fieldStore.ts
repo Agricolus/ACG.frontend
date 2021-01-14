@@ -10,8 +10,9 @@ export interface IField {
     name: string;
     area: number;
     clientId: string;
-    boundaries: number[][][][];
-    unpassableBoundaries: number[][][][];
+    boundaries: [number, number][][];
+    unpassableBoundaries: [number, number][][];
+    modificationTime: Date;
     isRegistered: boolean;
 }
 

@@ -24,8 +24,8 @@
         <div class="card-info">
           Field area: {{ field.area.toFixed(2) }} hA
         </div>
-        <!-- <div class="card-info">Last modified: {{ field.lastModifiedTime }}</div> -->
-        <!-- <div class="card-info">Client: {{ field.clients.clients[0].name }}</div> -->
+        <div class="card-info">Last modified: {{ field.modificationTime }}</div>
+        <div class="card-info">Client: {{ fieldClient(field).name }}</div>
       </div>
       <button class="btn btn-outline" @click="registerField(field)">
         Import

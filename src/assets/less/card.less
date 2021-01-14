@@ -11,23 +11,13 @@
   grid-template-columns: min-content auto min-content;
   border-radius: @radius;
 
-  .body {
-    display: flex;
-   
-    flex-flow: column;
-    padding: 20px 0px;
-    flex: 1;
+  .card-body {
+  }
 
-
-    .info {
-      color: #43425D;
-      opacity: 0.5;
-      padding-top: 10px;
-
-      label {
-        font-size: 1rem;
-      }
-    }
+  .card-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0.5rem;
   }
 
 }

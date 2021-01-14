@@ -486,6 +486,14 @@ path.highlight {
   stroke: yellow;
   fill: yellow;
 }
+path.highlight.tractor-path {
+  fill: none;
+}
+text.tractor-path-arrow {
+  font-size: 3em;
+  fill: yellow;
+  width: 30px;
+}
 .card {
   display: grid;
   grid-gap: 2rem;
@@ -498,19 +506,10 @@ path.highlight {
   grid-template-columns: min-content auto min-content;
   border-radius: 5px;
 }
-.card .body {
-  display: flex;
-  flex-flow: column;
-  padding: 20px 0px;
-  flex: 1;
-}
-.card .body .info {
-  color: #43425D;
-  opacity: 0.5;
-  padding-top: 10px;
-}
-.card .body .info label {
-  font-size: 1rem;
+.card .card-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0.5rem;
 }
 select {
   width: 100%;

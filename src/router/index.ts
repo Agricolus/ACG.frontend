@@ -18,9 +18,10 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/components/machines/main.vue"),
       },
       {
-        path: '/machines/producers',
-        name: 'machines:producers',
-        component: () => import("@/components/machines/producers.vue"),
+        path: '/machines/:machineId',
+        name: 'machines:movements',
+        component: () => import("@/components/machines/movements.vue"),
+        props: true,
       },
       {
         path: '/customers',

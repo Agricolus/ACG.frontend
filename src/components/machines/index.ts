@@ -10,7 +10,7 @@ import svgIcon from "@/assets/img/tractor-icon-map.svg";
 
 machinesServices.getMachines(userStore.getters.getUser!.id);
 
-const machineLayer = L.featureGroup();
+export const machinesLayer = L.featureGroup();
 
 const icon = L.icon({
   iconUrl: svgIcon,
@@ -18,17 +18,13 @@ const icon = L.icon({
 });
 
 watch(() => machinesStore.state.machines?.map(m => m), (n, o) => {
-  machineLayer.clearLayers();
+  machinesLayer.clearLayers();
   if (n.length) {
     n.forEach(m => {
       if (!m.lat || !m.lng) return;
       const marker = L.marker([m.lat, m.lng], { icon: icon });
       marker.bindPopup(m.name);
-      machineLayer.addLayer(marker);
+      machinesLayer.addLayer(marker);
     });
   }
 });
-
-export default {
-  layer: machineLayer
-}
