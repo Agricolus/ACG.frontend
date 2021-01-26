@@ -14,7 +14,7 @@ import { IClient } from '@/store/clientStore';
 @Options({
 })
 export default class JohnDeereFieldsSelection extends Vue {
-
+    show = true;
     isLoading = false;
     get user() {
         return userStore.getters.getUser!;
@@ -28,7 +28,9 @@ export default class JohnDeereFieldsSelection extends Vue {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async registerField(field: any) {
         if (field.isRegistered) return;
-        await producerService.registerField(this.user.id, field);
+        const registeredField = await producerService.registerField(this.user.id, field);
+        const f = this.fields?.find(f => f.id == registeredField.id);
+        if (f) f.isRegistered = true;
     }
 
     async registerFields(field: any) {

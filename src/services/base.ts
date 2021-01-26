@@ -50,8 +50,10 @@ export default class BaseRestService {
         if (!procede) throw "security not valid";
     }
 
-    protected async get<T>(resourceUrl: string): Promise<T | null> {
+    protected async get<T>(resourceUrl: string, queryParams: { [key: string]: any } | null = null): Promise<T | null> {
         await this.checkToken();
+        if (queryParams)
+            resourceUrl += '?' + new URLSearchParams(JSON.parse(JSON.stringify(queryParams)));
         const request = new Request(resourceUrl, this.initGetRequest);
         const response = await fetch(request);
         if (!response.ok && response.status == 401)

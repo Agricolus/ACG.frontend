@@ -1,6 +1,12 @@
 <template>
-  <h2>Machine selection</h2>
-  <div class="list">
+  <h2>
+    Machine selection
+    <button @click="show = !show" class="btn btn-primary">
+      <i v-if="show" class="fas fa-eye"></i>
+      <i v-else class="fas fa-eye-slash"></i>
+    </button>
+  </h2>
+  <div class="list" v-show="show">
     <div class="loading" v-if="isLoading">
       <div class="dot-pulse"></div>
     </div>
@@ -13,21 +19,21 @@
         <div class="card-info">{{ machine.description }}</div>
         <div class="card-info">{{ machine.producerCommercialName }}</div>
       </div>
-      <button
-        class="btn btn-outline"
-        @click="registerMachine(machine)"
-        :disabled="machine.isRegistered"
-      >
-        Import
-        <i class="fas fa-upload"></i>
-      </button>
-      <button
-        class="btn btn-outline"
-        @click="locationHistory(machine)"
-      >
-        Locations
-        <i class="fas fa-sync"></i>
-      </button>
+      <div class="card-buttons vertical">
+        <button
+          class="btn btn-outline"
+          @click="registerMachine(machine)"
+          :disabled="machine.isRegistered"
+        >
+          Import
+          <i class="fas fa-upload"></i>
+        </button>
+        <br />
+        <button class="btn btn-outline" @click="locationHistory(machine)">
+          Locations
+          <i class="fas fa-sync"></i>
+        </button>
+      </div>
     </div>
   </div>
 </template>

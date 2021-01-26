@@ -7,6 +7,9 @@ import { producerService } from '../service';
 @Options({
 })
 export default class JohnDeerDocumentSelection extends Vue {
+
+    isLoading = false;
+    
     get user() {
         return userStore.getters.getUser!;
     }
@@ -20,10 +23,9 @@ export default class JohnDeerDocumentSelection extends Vue {
     }
 
     async mounted() {
+        this.isLoading = true;
         this.documents = await producerService.getDocuments(userStore.getters.getUser!.id);
+        this.isLoading = false;
     }
 
-    setup() {
-        console.log("")
-    }
 }

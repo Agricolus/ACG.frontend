@@ -19,7 +19,7 @@ export default defineComponent({
         // }).addTo(leafletMainMap);
 
         L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-          maxZoom: 18,
+          maxZoom: 20,
           subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
         }).addTo(leafletMainMap);
         leafletMainMap.setView(reactiveMapState.center, reactiveMapState.zoom);
@@ -34,9 +34,7 @@ export default defineComponent({
 
     // watch<L.Layer[]>(reactiveMapState.layers.map(l => l), async (n, o) => {
     watch(() => reactiveMapState.layers.map(l => l), async (n, o) => {
-      console.debug("layer", n, o)
       const map = await mapReady;
-      console.debug("layer2", n, o)
       const newLayers = n.filter(x => !o.includes(x));
       const layerToRemove = o.filter(x => !n.includes(x!));
       newLayers.forEach(l => l.addTo(map))
@@ -44,9 +42,7 @@ export default defineComponent({
     }, { flush: 'sync' });
 
     watch<L.LatLngBounds | null>(() => reactiveMapState.bounds, async (n, o) => {
-      console.debug("bound")
       const map = await mapReady;
-      console.debug("bound2")
       if (n && n.isValid()) map.fitBounds(n);
     }, { flush: 'sync' });
   },

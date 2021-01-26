@@ -23,6 +23,7 @@ export class FieldRenderer {
       return poly;
     });
   }
+  
   get unpassableBoundaries(): L.Polygon[] {
     return this.field.unpassableBoundaries.map(polycoords => {
       const poly = new L.Polygon(polycoords.map(c => [c[0], c[1]]), { className: "not-passable" });

@@ -14,22 +14,22 @@ class MachinesServices extends BaseRestService {
         this.baseEndpointsUrl = CONFIGURATION.api?.apiServerUrl!;
     }
 
-    async getMachines(userId: string): Promise<IMachine[]|null> {
+    async getMachines(userId: string): Promise<IMachine[] | null> {
         const machines = await this.get<IMachine[]>(`${this.baseEndpointsUrl}/machines/${userId}`);
         if (machines != null)
             machinesStore.dispatch("setMachines", machines);
         return machines;
     }
 
-    async registerMachine(machine: IMachine): Promise<IMachine|null> {
+    async registerMachine(machine: IMachine): Promise<IMachine | null> {
         const machineR = await this.post<IMachine>(`${this.baseEndpointsUrl}/machines/import/producer`, machine);
         if (machineR != null)
             machinesStore.dispatch("setMachine", machineR);
         return machineR;
     }
 
-    async getMachineMovements(userId: string, machineId: string): Promise<any[] | null> {
-        return await this.get<any[]>(`${this.baseEndpointsUrl}/machines/${userId}/${machineId}`);        
+    async getMachineMovements(userId: string, machineId: string, params: { intersected?: boolean; start?: Date; end?: Date } | null = null): Promise<any[] | null> {
+        return await this.get<any[]>(`${this.baseEndpointsUrl}/machines/${userId}/${machineId}`, params);
     }
 }
 

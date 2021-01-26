@@ -2,32 +2,57 @@
   <div class="container">
     <header>
       <label>Machine Movements</label>
+      <div class="date-interval-selection">
+        <button @click="prevInterval" class="btn btn-primary">
+          <i class="fas fa-chevron-circle-left"></i>
+        </button>
+        <label>
+          <span>start date</span>
+          <date-picker
+            v-model="startDate"
+            @update:model-value="fetchDataFormService"
+            :upperLimit="endDate"
+          ></date-picker>
+        </label>
+        <label>
+          <span>end date</span>
+          <date-picker
+            v-model="endDate"
+            @update:model-value="fetchDataFormService"
+            :upperLimit="new Date()"
+            :lowerLimit="startDate"
+          ></date-picker>
+        </label>
+        <button
+          @click="nextInterval"
+          class="btn btn-primary"
+          :disabled="!canClickNextInterval"
+        >
+          <i class="fas fa-chevron-circle-right"></i>
+        </button>
+      </div>
     </header>
     <section class="scrollable">
       <machine-card :machine="machine" />
-      <div
-        class="card"
-        v-for="movement in inFieldMovements"
-        :key="movement.field.id"
-      >
+      <div class="card" v-for="(movements, day) in days" :key="day">
         <div></div>
         <div class="card-body">
-          field name: {{ movement.field.name }}
-          <div v-for="(points, i) in movement.points" :key="i" @mouseenter="highlights(points, true)" @mouseleave="highlights(points, false)">
-            movement details: <br/>
-            strat: {{ dateOf(points) }}<br/>
-            end: {{ points[points.length - 1].time}}<br/>
-            points: {{ points.length }}
+          day: {{ day }}
+          <div
+            class="card-body-section"
+            v-for="movement in movements"
+            :key="movement.start"
+          >
+            <input type="checkbox" v-model="selectedPaths" :value="movement.start" :disabled="dayshown != day"/>
+            from {{ hoursminutes(movement.start) }} to {{ hoursminutes(movement.end) }} <br />
+            operation: {{ movement.operation || "no operation" }}
           </div>
         </div>
-      </div>
-      <div
-        class="card"
-        v-for="(points, i) in outFieldMovementsPoints"
-        :key="i"
-      >
-        <div></div>
-        <div class="card-body" @mouseenter="highlights(points, true)" @mouseleave="highlights(points, false)">movement date: {{ dateOf(points) }}</div>
+        <div class="card-buttons top">
+          <button @click="draw(movements, day)" class="btn btn-primary">
+            <i class="fas fa-crosshairs"></i>
+          </button>
+        </div>
       </div>
     </section>
   </div>

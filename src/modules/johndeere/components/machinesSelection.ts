@@ -10,6 +10,8 @@ import { producerService } from '../service';
 })
 export default class JohnDeereMachineSelection extends Vue {
 
+
+  show = true;
   isLoading = false;
   get user() {
     return userStore.getters.getUser!;

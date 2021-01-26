@@ -1,12 +1,16 @@
 <template>
   <h2>
     Fields & Clients selection
-    <button class="btn btn-outline" @click="registerFields">
+    <button @click="show = !show" class="btn btn-primary">
+      <i v-if="show" class="fas fa-eye"></i>
+      <i v-else class="fas fa-eye-slash"></i>
+    </button>
+    <!-- <button class="btn btn-outline" @click="registerFields">
       Import All
       <i class="fas fa-upload"></i>
-    </button>
+    </button> -->
   </h2>
-  <div class="list">
+  <div class="list" v-show="show">
     <div class="loading" v-if="isLoading">
       <div class="dot-pulse"></div>
     </div>
@@ -21,13 +25,15 @@
       <i v-else></i>
       <div class="card-body">
         <div class="card-info">Field name: {{ field.name }}</div>
-        <div class="card-info">
-          Field area: {{ field.area.toFixed(2) }} hA
-        </div>
+        <div class="card-info">Field area: {{ field.area.toFixed(2) }} hA</div>
         <div class="card-info">Last modified: {{ field.modificationTime }}</div>
         <div class="card-info">Client: {{ fieldClient(field).name }}</div>
       </div>
-      <button class="btn btn-outline" @click="registerField(field)">
+      <button
+        class="btn btn-outline"
+        @click="registerField(field)"
+        :disabled="field.isRegistered"
+      >
         Import
         <i class="fas fa-upload"></i>
       </button>
