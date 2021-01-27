@@ -4,9 +4,12 @@ import { IMachine } from '@/store/machineStore';
 import L from 'leaflet';
 import { Options, Vue } from "vue-class-component";
 import { producerService } from '../service';
-
+import Loader from "@/components/loader/loader.vue";
 
 @Options({
+  components: {
+    Loader
+  }
 })
 export default class JohnDeereMachineSelection extends Vue {
 

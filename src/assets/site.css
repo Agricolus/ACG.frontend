@@ -515,10 +515,17 @@ text.tractor-path-arrow {
   grid-template-columns: min-content auto min-content;
   border-radius: 5px;
 }
+.card.highlighted {
+  border: 1px solid #cdcdcd;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+}
 .card .card-body .card-body-section {
   margin-top: 0.5em;
   padding-top: 0.1em;
   border-top: 1px solid #ccc;
+}
+.card .card-body .card-body-section span {
+  display: block;
 }
 .card .card-buttons {
   display: grid;

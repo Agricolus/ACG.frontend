@@ -34,18 +34,27 @@
     </header>
     <section class="scrollable">
       <machine-card :machine="machine" />
-      <div class="card" v-for="(movements, day) in days" :key="day">
+      <div class="card" v-for="(movements, day) in days" :key="day" :class="{highlighted: dayshown == day}">
         <div></div>
         <div class="card-body">
-          day: {{ day }}
+          day: <strong>{{ day }}</strong>
           <div
             class="card-body-section"
             v-for="movement in movements"
             :key="movement.start"
           >
-            <input type="checkbox" v-model="selectedPaths" :value="movement.start" :disabled="dayshown != day"/>
-            from {{ hoursminutes(movement.start) }} to {{ hoursminutes(movement.end) }} <br />
-            operation: {{ movement.operation || "no operation" }}
+            <input
+              type="checkbox"
+              v-model="selectedPaths"
+              :value="day + movement.start"
+              :disabled="dayshown != day"
+              style="float: left"
+            />
+            <span>
+              from <strong>{{ hoursminutes(movement.start) }}</strong> to
+              <strong>{{ hoursminutes(movement.end) }}</strong>
+            </span>
+            <span> operation: <strong>{{ movement.operation || "no operation" }}</strong></span>
           </div>
         </div>
         <div class="card-buttons top">

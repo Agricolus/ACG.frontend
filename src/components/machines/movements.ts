@@ -46,9 +46,6 @@ type MovementDescription = { operation: string | null; start: string; end: strin
 })
 export default class MacineMovementsSelect extends Vue.with(Props) {
 
-    routesPolylineMap: Map<Date, L.Polyline> = new Map<Date, L.Polyline>();
-    layerGroupMap: Map<Date, number> = new Map<Date, number>();
-
     movements: any[] | null = [];
 
     layer: L.FeatureGroup = new L.FeatureGroup();
@@ -56,23 +53,16 @@ export default class MacineMovementsSelect extends Vue.with(Props) {
     startDate: Date = subDays(new Date(), 7);
 
     endDate: Date = new Date();
-    startmarker: L.Marker<any> | null = null;
-    endmarker: L.Marker<any> | null = null;
     days: any = {};
     dayshown = "";
     selectedPaths: string[] = [];
+
+    loading = false;
 
     get machine(): IMachine {
         return machinesStore.getters.getMachine(this.machineId)!;
     }
 
-    get inFieldMovements() {
-        return (this.movements || []).filter(m => m.field);
-    }
-
-    get outFieldMovementsPoints() {
-        return (this.movements || []).find((f) => !f.field)?.points
-    }
 
     hoursminutes(v: string) {
         const p = v.split(":");
@@ -99,15 +89,19 @@ export default class MacineMovementsSelect extends Vue.with(Props) {
 
     draw(movements: MovementDescription[], dayshown: string) {
         this.dayshown = dayshown;
-        this.selectedPaths = movements.map(m => m.start);
+        this.selectedPaths = movements.map(m => dayshown + m.start);
         this.drawSelectedPaths(movements);
     }
 
     drawSelectedPaths(movements: MovementDescription[]) {
         this.layer.clearLayers();
+        if (!movements) return;
         let lastpoint: any = null;
         movements.forEach(m => {
-            if (this.selectedPaths.indexOf(m.start) < 0) return;
+            if (this.selectedPaths.indexOf(this.dayshown + "" + m.start) < 0) {
+                lastpoint = null;
+                return;
+            }
 
             const lineoptions = { weight: 8, className: "tractor-path" } as L.PolylineOptions;
             const textymboloptions = { offset: 4, repeat: true, attributes: { fill: 'green', className: "tractor-path-arrow" } };
@@ -149,9 +143,9 @@ export default class MacineMovementsSelect extends Vue.with(Props) {
             if (lastpoint != null) {
                 lineoptions.weight = 1;
                 lineoptions.className = "tractor-path-connection";
-                // lineoptions.dashArray = [3, 1];
+                const opts = { offset: 4, repeat: true, attributes: { fill: '#3388ff' } };
                 const connectionpath = L.polyline([lastpoint.point, startpoint.point], lineoptions);
-                (daypath as any).setText('   ►   ', textymboloptions);
+                (connectionpath as any).setText('   ►   ', opts);
                 connectionpath.addTo(this.layer);
             }
             lastpoint = endp;
@@ -161,9 +155,11 @@ export default class MacineMovementsSelect extends Vue.with(Props) {
 
     async fetchDataFormService() {
         this.layer.clearLayers();
-        this.movements = await machinesServices.getMachineMovements(userStore.getters.getUser!.id,
-            this.machineId!,
-            { start: this.startDate, end: this.endDate });
+        this.loading = true;
+        const userid = userStore.getters.getUser!.id
+        this.movements = await machinesServices.getMachineMovements(userid, this.machineId!, { start: this.startDate, end: this.endDate });
+        this.loading = false;
+        this.selectedPaths = [];
     }
 
     beforeMount() {

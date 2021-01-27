@@ -1,17 +1,16 @@
 import reactiveMapState from '@/components/map/mapState';
 import { userStore } from '@/store/userStore';
-import { IMachine } from '@/store/machineStore';
 import L from 'leaflet';
-import { resolveTransitionHooks } from 'vue';
 import { Options, Vue } from "vue-class-component";
-import { stringifyQuery } from 'vue-router';
 import { producerService } from '../service';
-import component from '*.vue';
 import { IField } from '@/store/fieldStore';
 import { IClient } from '@/store/clientStore';
-
+import Loader from "@/components/loader/loader.vue";
 
 @Options({
+  components: {
+    Loader
+  }
 })
 export default class JohnDeereFieldsSelection extends Vue {
     show = true;
@@ -33,7 +32,7 @@ export default class JohnDeereFieldsSelection extends Vue {
         if (f) f.isRegistered = true;
     }
 
-    async registerFields(field: any) {
+    async registerFields() {
         if (!this.fields) return;
         await producerService.registerFields(this.user.id, this.fields);
     }
@@ -68,7 +67,7 @@ export default class JohnDeereFieldsSelection extends Vue {
             const client = this.fieldClient(f);
             f.boundaries.forEach(polycoords => {
                 const poly = new L.Polygon(polycoords.map(c => [c[0], c[1]]), { className: "passable" });
-                poly.bindPopup((p) => {
+                poly.bindPopup(() => {
                     return `name: ${f.name}<br/>client: ${client.name}<br/>passable`;
                 })
                 poly.addTo(this.fieldsLayer);
@@ -76,7 +75,7 @@ export default class JohnDeereFieldsSelection extends Vue {
             });
             f.unpassableBoundaries.forEach(polycoords => {
                 const poly = new L.Polygon(polycoords.map(c => [c[0], c[1]]), { className: "not-passable" });
-                poly.bindPopup((p) => {
+                poly.bindPopup(() => {
                     return `name: ${f.name}<br/>client: ${client.name}<br/>not passable`;
                 })
                 poly.addTo(this.fieldsLayer);
