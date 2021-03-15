@@ -1,0 +1,76 @@
+@import "less/reset.less";
+@import "less/btn.less";
+@import "less/variable.less";
+@import "less/layout.less";
+@import "less/sidebar.less";
+@import "less/table.less";
+
+@import "less/home.less";
+@import "less/map.less";
+@import "less/card.less";
+
+@import "less/form.less";
+@import "less/tooltip.less";
+@import "less/pagination.less";
+@import "less/modal.less";
+@import "less/loader.less";
+
+@import "less/reboot.less";
+
+@fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts";
+@fa-font-name: "fontawesome-webfont";
+@import "../../node_modules/@fortawesome/fontawesome-free/less/fontawesome.less";
+@import "../../node_modules/@fortawesome/fontawesome-free/less/solid.less";
+@import "../../node_modules/@fortawesome/fontawesome-free/less/regular.less";
+@import "../../node_modules/@fortawesome/fontawesome-free/less/brands.less";
+
+@font-face {
+  font-family: "source-sans-pro";
+  src: url("./font/source-sans-pro.regular.ttf") format("truetype");
+}
+
+body {
+  margin: 0;
+}
+
+hr {
+  width: 100%;
+  margin: 5px 0px;
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.divider-5 {
+  padding: 5px 0px;
+}
+
+.divider-10 {
+  padding: 10px 0px;
+}
+
+.divider-20 {
+  padding: 20px 0px;
+}
+
+.iziToast-wrapper-topRight {
+  right: 10px;
+  bottom: 10px;
+}
+
+
+
+body &::-webkit-scrollbar {
+  width: 7px;
+  background-color: #F5F5F5;
+}
+
+body &::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  border: 1px solid #aaa;
+
+  &:hover {
+    background: @white-1;
+  }
+}

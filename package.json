@@ -8,27 +8,35 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "core-js": "^3.7.0",
-    "vue": "^3.0.2",
-    "vue-class-component": "^8.0.0-beta.4",
-    "vue-router": "^4.0.0-rc.2",
-    "vuex": "^4.0.0-rc.1"
+    "@fortawesome/fontawesome-free": "^5.15.1",
+    "@types/geojson": "^7946.0.7",
+    "core-js": "^3.8.1",
+    "leaflet": "^1.7.1",
+    "leaflet-defaulticon-compatibility": "^0.1.1",
+    "leaflet-textpath": "^1.2.3",
+    "vue": "^3.0.4",
+    "vue-class-component": "^8.0.0-rc.1",
+    "vue-router": "^4.0.1",
+    "vue3-datepicker": "github:Agricolus/vue3-datepicker",
+    "vuex": "^4.0.0-rc.2"
   },
   "devDependencies": {
-    "@types/node": "^14.14.7",
+    "@types/leaflet": "^1.5.19",
+    "@types/node": "^14.14.14",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
-    "@vue/cli-plugin-babel": "^4.5.8",
-    "@vue/cli-plugin-eslint": "^4.5.8",
-    "@vue/cli-plugin-router": "^4.5.8",
-    "@vue/cli-plugin-typescript": "^4.5.8",
-    "@vue/cli-plugin-vuex": "^4.5.8",
-    "@vue/cli-service": "^4.5.8",
-    "@vue/compiler-sfc": "^3.0.2",
+    "@vue/cli-plugin-babel": "^4.5.9",
+    "@vue/cli-plugin-eslint": "^4.5.9",
+    "@vue/cli-plugin-router": "^4.5.9",
+    "@vue/cli-plugin-typescript": "^4.5.9",
+    "@vue/cli-plugin-vuex": "^4.5.9",
+    "@vue/cli-service": "^4.5.9",
+    "@vue/compiler-sfc": "^3.0.4",
     "@vue/eslint-config-typescript": "^5.1.0",
     "eslint": "^6.8.0",
-    "eslint-plugin-vue": "^7.1.0",
-    "less": "^3.12.2",
+    "eslint-plugin-vue": "^7.3.0",
+    "json-loader": "^0.5.7",
+    "less": "^3.13.1",
     "less-loader": "^5.0.0",
     "typescript": "^3.9.7"
   },
@@ -37,7 +45,9 @@
     "env": {
       "node": true
     },
-    "plugins": ["@typescript-eslint"],
+    "plugins": [
+      "@typescript-eslint"
+    ],
     "extends": [
       "plugin:vue/vue3-essential",
       "eslint:recommended",
@@ -48,13 +58,18 @@
     },
     "rules": {
       "no-debugger": "warn",
+      "@typescript-eslint/no-non-null-assertion": "off",
       "@typescript-eslint/interface-name-prefix": "off",
       "@typescript-eslint/naming-convention": [
         "error",
         {
           "selector": "interface",
-          "format": ["PascalCase"],
-          "prefix": ["I"]
+          "format": [
+            "PascalCase"
+          ],
+          "prefix": [
+            "I"
+          ]
         }
       ]
     }
@@ -63,5 +78,10 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "vue": {
+    "devServer": {
+      "disableHostCheck": true
+    }
+  }
 }
