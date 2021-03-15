@@ -35,23 +35,18 @@ class SecurityService {
     }
 
     async checkToken(): Promise<boolean> {
-        console.debug("checkToken");
         const tokenInfo = this.tokenInfo;
         if (!tokenInfo) {
-            console.debug("checkToken: no token");
             this.startLogin();
             return false;
         }
         if (this.checkTokenRefresh()) {
-            console.debug("checkToken: refreshing token");
             const refreshed = await this.refreshToken();
             if (!refreshed) {
-                console.debug("checkToken: refresh token failed");
                 this.startLogin();
                 return false;
             }
         }
-        console.debug("checkToken: ok");
         return true;
     }
 

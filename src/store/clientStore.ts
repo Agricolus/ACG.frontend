@@ -78,3 +78,4 @@ const ClientsStore: Module<IState, RootState> = {
 const STORE_PREFIX = "clients";
 //store instance for direct access
 export const clientsStore = createStoreModule<IState, IGetters, IActions>(STORE_PREFIX, ClientsStore);
+
